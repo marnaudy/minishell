@@ -6,46 +6,11 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:01:35 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/04/29 16:35:55 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/04/29 17:04:54 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-
-static int	is_blank(char c)
-{
-	return (c == ' '
-		|| c == '\n'
-		|| c == '\t'
-		|| c == '\f'
-		|| c == '\r'
-		|| c == '\v'
-	);
-}
-
-static int	is_operator_char(char c)
-{
-	return (c == '&'
-		|| c == '|'
-		|| c == '<'
-		|| c == '>'
-		|| c == '('
-		|| c == ')'
-	);
-}
-
-static int	is_operator(char *str, int len)
-{
-	if (len > 2)
-		return (0);
-	if (!is_operator_char(str[0]))
-		return (0);
-	if (len == 2 && (str[0] == '(' || str[0] == ')'))
-		return (0);
-	if (len == 2)
-		return (str[0] == str[1]);
-	return (1);
-}
 
 static int	add_token(char *token, t_list **list)
 {
@@ -59,16 +24,6 @@ static int	add_token(char *token, t_list **list)
 	}
 	ft_lstadd_back(list, new);
 	return (0);
-}
-
-static int	can_add_to_token(char *token, int token_len)
-{
-	return (token[token_len] != 0
-		&& !is_blank(token[token_len])
-		&& ((is_operator(&token[0], token_len)
-				&& is_operator(&token[0], token_len + 1))
-			|| (!is_operator(&token[0], token_len)
-				&& !is_operator(&token[token_len], 1))));
 }
 
 static int	quote_len(char *str)
@@ -102,7 +57,7 @@ static int	skip_quote(char *input, int idx, int *token_len)
 	return (0);
 }
 
-int	get_next_token(char *input, int *idx, char **token)
+static int	get_next_token(char *input, int *idx, char **token)
 {
 	int	token_len;
 
