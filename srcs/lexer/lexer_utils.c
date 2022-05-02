@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 17:01:45 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/04/29 17:05:01 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/02 15:21:41 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	is_operator_char(char c)
 	);
 }
 
-static int	is_operator(char *str, int len)
+int	is_operator(char *str, int len)
 {
 	if (len > 2)
 		return (0);

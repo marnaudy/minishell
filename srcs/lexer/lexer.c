@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:01:35 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/04/29 17:04:54 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/02 15:40:02 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static int	skip_quote(char *input, int idx, int *token_len)
 {
 	int	len_quote;
 
+	if (is_operator(&input[idx], *token_len))
+		return (0);
 	if (input[idx + *token_len] == '\"' || input[idx + *token_len] == '\"')
 	{
 		len_quote = quote_len(&input[idx + *token_len]);
@@ -66,7 +68,7 @@ static int	get_next_token(char *input, int *idx, char **token)
 		(*idx)++;
 	if (input[*idx] == 0)
 		return (0);
-	token_len = 1;
+	token_len = 0;
 	while (1)
 	{
 		if (skip_quote(input, *idx, &token_len))
