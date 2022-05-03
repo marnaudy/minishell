@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 17:01:45 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/02 15:21:41 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/03 16:05:30 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	is_operator(char *str, int len)
 		return (0);
 	if (len == 2)
 		return (str[0] == str[1]);
+	if (str[0] == '&' && str[1] != '&')
+		return (0);
 	return (1);
 }
 

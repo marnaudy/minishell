@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:01:35 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/02 15:40:02 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/03 15:51:47 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,42 +26,32 @@ static int	add_token(char *token, t_list **list)
 	return (0);
 }
 
-static int	quote_len(char *str)
+static int	get_token_len(char *input, int idx, int *token_len)
 {
-	int		len;
-	char	quote_char;
+	int	ret;
 
-	quote_char = str[0];
-	len = 1;
-	while (str[len] && str[len] != quote_char)
-		len++;
-	if (str[len] == quote_char)
-		return (len + 1);
-	return (-1);
-}
-
-static int	skip_quote(char *input, int idx, int *token_len)
-{
-	int	len_quote;
-
-	if (is_operator(&input[idx], *token_len))
-		return (0);
-	if (input[idx + *token_len] == '\"' || input[idx + *token_len] == '\"')
+	while (1)
 	{
-		len_quote = quote_len(&input[idx + *token_len]);
-		if (len_quote < 0)
-		{
-			write(STDERR_FILENO, "Unclosed quote\n", 15);
-			return (1);
-		}
-		*token_len += len_quote;
+		ret = skip_quote(input, idx, token_len);
+		if (ret < 0)
+			return (-1);
+		if (ret == 0)
+			continue ;
+		ret = skip_parameter(input, idx, token_len);
+		if (ret < 0)
+			return (-1);
+		if (ret == 0)
+			continue ;
+		if (!can_add_to_token(&input[idx], *token_len))
+			return (0);
+		(*token_len)++;
 	}
-	return (0);
 }
 
 static int	get_next_token(char *input, int *idx, char **token)
 {
 	int	token_len;
+	int	ret;
 
 	*token = NULL;
 	while (is_blank(input[*idx]))
@@ -69,14 +59,9 @@ static int	get_next_token(char *input, int *idx, char **token)
 	if (input[*idx] == 0)
 		return (0);
 	token_len = 0;
-	while (1)
-	{
-		if (skip_quote(input, *idx, &token_len))
-			return (1);
-		if (!can_add_to_token(&input[*idx], token_len))
-			break ;
-		token_len++;
-	}
+	ret = get_token_len(input, *idx, &token_len);
+	if (ret < 0)
+		return (1);
 	*token = ft_substr(input, *idx, token_len);
 	if (!token)
 		return (-1);
