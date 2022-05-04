@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:16:19 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/04 16:21:21 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/04 17:59:28 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,24 +83,4 @@ int	check_syntax(t_list *token_list, char *prog_name)
 		token_list = token_list->next;
 	}
 	return (0);
-}
-
-int	lexer(t_list **list, char *input, char *prog_name);
-
-int main()
-{
-	t_list	*token_list;
-	char *input = "echo ${\"prout\" && } $ & prout&&pouet && blqblq&bla ${{} \'blou\'\"blou\" \"${va\"r}\" \"}}}\"}\" bouet&&( cat&&) <";
-
-	token_list = NULL;
-	puts(input);
-	int ret = lexer(&token_list, input, "prout");
-	printf("lexer return = %i\n", ret);
-	ret = check_syntax(token_list, "prout");
-	printf("check_syntax return = %i\n", ret);
-	while (token_list)
-	{
-		printf("_%s_\n", (char *) token_list->content);
-		token_list = token_list->next;
-	}
 }
