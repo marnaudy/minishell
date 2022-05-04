@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:16:19 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/04 12:03:36 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/04 16:21:21 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static int	print_error_message(t_list *token, char *prog_name)
 	return (0);
 }
 
-static int	error_printer_error_checker(t_list *token_list, char *prog_name, int next)
+static int	error_printer_error_checker(t_list *token_list,
+	char *prog_name, int next)
 {
 	int	ret;
 
