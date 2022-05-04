@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:11:48 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/03 15:02:23 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/03 17:55:26 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <errno.h>
 # include <stdio.h>
 # include <unistd.h>
-# include "../../libft/libft.h"
+# include "../libft/libft.h"
 
 int	is_blank(char c);
 int	is_operator(char *str, int len);
