@@ -6,7 +6,7 @@
 #    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/04 17:56:01 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/05/05 18:43:12 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,11 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/environment/environment.c \
 			srcs/environment/free_environment.c \
 			srcs/environment/init_environment.c \
+			srcs/parameter_expansion/replace_in_str.c \
+			srcs/parameter_expansion/parameter_len.c \
+			srcs/parameter_expansion/bad_substitution.c \
+			srcs/parameter_expansion/replace_parameter.c \
+			srcs/parameter_expansion/replace_all_parameters.c \
 			tester.c
 
 HEADERS	=	lexer.h \
@@ -35,7 +40,7 @@ OBJS	=	${SRCS:.c=.o}
 
 CC		=	cc
 
-CFLAGS	=	-Wall -Wextra -Werror -I./include
+CFLAGS	=	-Wall -Wextra -Werror -I./include -g
 
 RM		=	rm -f
 

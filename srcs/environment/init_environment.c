@@ -6,22 +6,24 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:26:38 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/04 17:05:52 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:31:05 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environment.h"
 
-int	is_valid_parameter(char *parameter)
+int	is_valid_parameter(char *parameter, int len)
 {
 	int	i;
 
+	if (len < 0)
+		len = ft_strlen(parameter);
 	if (parameter == NULL)
 		return (0);
 	if (!(ft_isalpha(parameter[0]) || parameter[0] == '_'))
 		return (0);
 	i = 1;
-	while (parameter[i])
+	while (parameter[i] && i < len)
 	{
 		if (!(ft_isalnum(parameter[i]) || parameter[i] == '_'))
 			return (0);
@@ -43,7 +45,7 @@ static int	split_equal(char **key, char **value, char *input)
 	*key = ft_substr(input, 0, i);
 	if (!*key)
 		return (-1);
-	if (!is_valid_parameter(*key))
+	if (!is_valid_parameter(*key, -1))
 	{
 		free(*key);
 		return (1);

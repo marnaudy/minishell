@@ -6,14 +6,16 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 12:38:39 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/03 16:19:58 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:03:25 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-static int	skip_simple_quote(char *input, int idx, int *token_len)
+int	skip_simple_quote(char *input, int idx, int *token_len)
 {
+	if (input[idx + *token_len] != '\'')
+		return (1);
 	(*token_len)++;
 	while (1)
 	{
