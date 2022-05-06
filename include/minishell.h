@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/06 10:52:45 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/06 11:07:10 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int				remove_value(t_hash_table *table, char *key);
 int				is_valid_parameter(char *parameter, int len);
 int				skip_simple_quote(char *input, int idx, int *token_len);
 int				skip_quote(char *input, int idx, int *token_len);
-int				replace_all_parameters(char **str, t_general_info *info);
+int				replace_all_parameters(char **str, t_general_info *info,
+					int ignore_quotes);
 
 #endif

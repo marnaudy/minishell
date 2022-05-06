@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:31:52 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/06 10:54:35 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/06 11:08:42 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int argc, char **argv, char **envp)
 	token_list = list_save;
 	while (token_list)
 	{
-		ret = replace_all_parameters((char **) &token_list->content, &info);
+		ret = replace_all_parameters((char **) &token_list->content, &info, 0);
 		printf("return = %i, token = %s\n", ret, (char *)token_list->content);
 		token_list = token_list->next;
 	}
