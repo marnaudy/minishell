@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 11:48:00 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/05 18:42:03 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/06 10:51:26 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,7 @@ static int	replace_parameter_brace(char **str, int *idx,
 	return (free_and_ret(parameter, 0));
 }
 
-int	replace_parameter(char **str, int exit_code, int *idx,
-	t_hash_table *table, char *prog_name)
+int	replace_parameter(char **str, int *idx, t_general_info *info)
 {
 	int	param_len;
 
@@ -92,8 +91,9 @@ int	replace_parameter(char **str, int exit_code, int *idx,
 		return (0);
 	if (!ft_strncmp(&(*str)[*idx], "$?", 2)
 		|| !ft_strncmp(&(*str)[*idx], "${?}", 4))
-		return (replace_parameter_exit_code(str, exit_code, idx, param_len));
+		return (
+			replace_parameter_exit_code(str, info->exit_code, idx, param_len));
 	if ((*str)[(*idx) + 1] != '{')
-		return (replace_parameter_no_brace(str, idx, table, param_len));
-	return (replace_parameter_brace(str, idx, table, prog_name));
+		return (replace_parameter_no_brace(str, idx, info->table, param_len));
+	return (replace_parameter_brace(str, idx, info->table, info->prog_name));
 }

@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:31:52 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/05 18:34:02 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/06 10:54:35 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char **argv, char **envp)
 	int				ret;
 	t_hash_table	*table;
 	char			*value;
+	t_general_info	info;
 
 	//Lexer and syntax test
 
@@ -57,10 +58,13 @@ int	main(int argc, char **argv, char **envp)
 	}
 
 	// Parameter expansion
+	info.exit_code = 12;
+	info.prog_name = "prout";
+	info.table = table;
 	token_list = list_save;
 	while (token_list)
 	{
-		ret = replace_all_parameters((char **) &token_list->content, 12, table, "prout");
+		ret = replace_all_parameters((char **) &token_list->content, &info);
 		printf("return = %i, token = %s\n", ret, (char *)token_list->content);
 		token_list = token_list->next;
 	}
