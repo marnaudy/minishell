@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 11:48:00 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/06 10:51:26 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/06 11:35:30 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,14 @@ static int	replace_parameter_brace(char **str, int *idx,
 	int		param_len;
 
 	param_len = parameter_len(&(*str)[*idx]);
+	if (param_len == -1)
+		return (bad_sub_message(&(*str)[*idx], prog_name, 0));
 	parameter = ft_substr(&(*str)[2], *idx, param_len - 3);
 	if (!parameter)
 		return (-1);
 	if (!is_valid_parameter(parameter, -1))
-		return (free_and_ret(parameter, bad_sub_message(parameter, prog_name)));
+		return (free_and_ret(parameter,
+				bad_sub_message(parameter, prog_name, 1)));
 	value = fetch_value(table, parameter);
 	new_str = replace_in_str(*str, *idx, param_len, value);
 	if (!new_str)

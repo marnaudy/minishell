@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:34:50 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/05 18:35:23 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/06 11:29:27 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static int	parameter_len_brace(char *str)
 		ret = 0;
 		while (ret == 0)
 			ret = skip_quote(str, 0, &len);
+		if (str[len] == '\0')
+			return (-1);
 		if (str[len] == '}')
 			return (len + 1);
 		len++;
