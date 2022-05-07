@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 12:17:59 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/07 16:52:35 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/07 17:38:57 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	is_escaped(char *str, int pos)
 		ret = -1;
 		if (str[idx] == '\"' || str[idx] == '\'')
 			ret = is_escaped_in_quotes(str, pos, &idx);
-		if (str[idx] == '$' && str[idx + 1] == '{')
+		if (ret < 0 && str[idx] == '$' && str[idx + 1] == '{')
 		{
 			idx++;
 			ret = is_escaped_in_braces(str, pos, &idx);
@@ -122,9 +122,19 @@ int	is_escaped(char *str, int pos)
 	return (0);
 }
 
-int	main(int argc, char **argv)
+int	main()
 {
-	(void) argc;
-	puts(argv[1]);
-	printf("ret = %i\n", is_escaped(argv[1], atoi(argv[2])));
+	char	*input;
+	int		len;
+	int		i;
+
+	input = "\"${var}\\$\\\"\\\'${\"he\'\\\"llo\"\'bonj\"\\\'our\'}\"";
+	len = ft_strlen(input);
+	puts(input);
+	i = 0;
+	while (i < len)
+	{
+		printf("char %c is escaped : %i\n", input[i], is_escaped(input, i));
+		i++;
+	}
 }
