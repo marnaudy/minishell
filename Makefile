@@ -6,7 +6,7 @@
 #    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/09 11:16:32 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/05/09 15:03:41 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/lexer/lexer_quote.c \
 			srcs/lexer/lexer_utils.c \
 			srcs/lexer/lexer.c \
+			srcs/syntax_error/check_first_token.c \
 			srcs/syntax_error/check_token.c \
 			srcs/syntax_error/syntax_error.c \
 			srcs/environment/environment.c \
@@ -28,6 +29,7 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/parameter_expansion/replace_in_str.c \
 			srcs/parameter_expansion/parameter_len.c \
 			srcs/parameter_expansion/bad_substitution.c \
+			srcs/parameter_expansion/add_backslash.c \
 			srcs/parameter_expansion/replace_parameter.c \
 			srcs/parameter_expansion/replace_all_parameters.c \
 			tester.c

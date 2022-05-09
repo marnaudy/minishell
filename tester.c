@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:31:52 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/09 12:30:02 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/09 14:53:11 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv, char **envp)
 
 	//Lexer and syntax test
 
-	input = "echo ${\"pro\\\"ut\" && } $& \\\'prout&&pouet && blqblq&bla ${{\\}baobab} \'blou\'\"blou\" \"${va\"r}\" \"}}}\"}\" bouet&&( cat&&&) <in $var$var ${var}${var} $prout \'$var\' \"$var\" \"$?var\"$va?r $$var? $DISPLAY \'$\'var $$$var $\"${var}\" echo $var ${var} $? ${\"var\"} \'$var\' \"\\\\\\\" \\\' ${\\\" \\\\ \\} \'\\\' \\a\' }\" p{var}";
+	input = "echo ${\"pro\\\"ut\" && } $& $var \\\'prout&&pouet && blqblq&bla ${{\\}baobab} \'blou\'\"blou\" \"${va\"r}\" \"}}}\"}\" bouet&&( cat&&&) || in $var$var ${var}${var} $prout \'$var\' \"$var\" \"$?var\"$va?r $$var? $DISPLAY \'$\'var $$$var $\"${var}\" echo $var ${var} $? ${\"var\"} | () \'$var\' \"\\\\\\\" \\\' ${\\\" \\\\ \\} \'\\\' \\a\' }\" p{var}";
 	i = 0;
 	while (i < ft_strlen(input))
 	{

@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 11:48:00 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/09 12:35:32 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/09 15:01:33 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ static int	replace_parameter_no_brace(char **str, int *idx,
 	(*idx) += ft_strlen(value) - 1;
 	free(*str);
 	*str = new_str;
-	return (free_and_ret(parameter, 0));
+	return (free_and_ret(parameter, add_backslash(str,
+				*idx + 1 - ft_strlen(value), ft_strlen(value))));
 }
 
 static int	replace_parameter_brace(char **str, int *idx,
@@ -82,7 +83,8 @@ static int	replace_parameter_brace(char **str, int *idx,
 	(*idx) += ft_strlen(value) - 1;
 	free(*str);
 	*str = new_str;
-	return (free_and_ret(parameter, 0));
+	return (free_and_ret(parameter, add_backslash(str,
+				*idx + 1 - ft_strlen(value), ft_strlen(value))));
 }
 
 int	replace_parameter(char **str, int *idx, t_general_info *info)
@@ -93,7 +95,7 @@ int	replace_parameter(char **str, int *idx, t_general_info *info)
 	if (!param_len)
 		return (0);
 	if ((!ft_strncmp(&(*str)[*idx], "$?", 2)
-			|| !ft_strncmp(&(*str)[*idx], "${?}", 4))
+		|| !ft_strncmp(&(*str)[*idx], "${?}", 4))
 		&& !is_escaped(*str, *idx))
 		return (
 			replace_parameter_exit_code(str, info->exit_code, idx, param_len));
