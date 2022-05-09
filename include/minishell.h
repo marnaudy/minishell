@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/09 11:16:52 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/09 17:18:44 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ int				skip_simple_quote(char *input, int idx, int *token_len);
 int				skip_quote(char *input, int idx, int *token_len);
 int				replace_all_parameters(char **str, t_general_info *info,
 					int ignore_quotes);
+int				quote_removal(char *token, char *prog_name);
 
 #endif

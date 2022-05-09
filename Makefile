@@ -6,7 +6,7 @@
 #    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/09 15:03:41 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/05/09 16:00:25 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/parameter_expansion/add_backslash.c \
 			srcs/parameter_expansion/replace_parameter.c \
 			srcs/parameter_expansion/replace_all_parameters.c \
+			srcs/quote_removal/quote_removal.c \
 			tester.c
 
 HEADERS	=	lexer.h \
