@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:36:29 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/06 11:07:33 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/09 12:13:27 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	replace_all_parameters(char **str, t_general_info *info, int ignore_quotes)
 	is_quoted = 0;
 	while ((*str)[idx])
 	{
-		if ((*str)[idx] == '\"')
+		if ((*str)[idx] == '\"' && !is_escaped(*str, idx))
 			is_quoted = !is_quoted;
 		if (!ignore_quotes && !is_quoted
 			&& skip_simple_quote(*str, 0, &idx) == 0)

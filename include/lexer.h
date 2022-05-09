@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:11:48 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/03 17:55:26 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/09 11:25:08 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include "../libft/libft.h"
+# include "minishell.h"
 
 int	is_blank(char c);
 int	is_operator(char *str, int len);

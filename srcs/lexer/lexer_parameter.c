@@ -6,36 +6,37 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 12:39:44 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/03 16:12:39 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/09 11:53:29 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int	skip_parameter(char *input, int idx, int *token_len)
+int	skip_parameter(char *input, int idx, int *tk_l)
 {
 	int	ret;
 
-	if (input[idx + *token_len] != '$' || input[idx + *token_len + 1] != '{')
+	if (input[idx + *tk_l] != '$' || input[idx + *tk_l + 1] != '{'
+		|| is_escaped(input, idx + *tk_l))
 		return (1);
-	(*token_len) += 2;
+	(*tk_l) += 2;
 	while (1)
 	{
 		ret = 0;
 		while (ret == 0)
-			ret = skip_quote(input, idx, token_len);
+			ret = skip_quote(input, idx, tk_l);
 		if (ret == -1)
 			return (-1);
-		if (input[idx + *token_len] == 0)
+		if (input[idx + *tk_l] == 0)
 		{
 			write(STDERR_FILENO, "Unclosed parameter\n", 19);
 			return (-1);
 		}
-		if (input[idx + *token_len] == '}')
+		if (input[idx + *tk_l] == '}' && !is_escaped(input, idx + *tk_l))
 		{
-			(*token_len)++;
+			(*tk_l)++;
 			return (0);
 		}
-		(*token_len)++;
+		(*tk_l)++;
 	}
 }

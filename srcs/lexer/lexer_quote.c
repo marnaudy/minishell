@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 12:38:39 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/05 15:03:25 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/09 12:23:52 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	skip_simple_quote(char *input, int idx, int *token_len)
 {
-	if (input[idx + *token_len] != '\'')
+	if (input[idx + *token_len] != '\'' || is_escaped(input, idx + *token_len))
 		return (1);
 	(*token_len)++;
 	while (1)
@@ -24,7 +24,8 @@ int	skip_simple_quote(char *input, int idx, int *token_len)
 			write(STDERR_FILENO, "Unclosed quote\n", 15);
 			return (-1);
 		}
-		if (input[idx + *token_len] == '\'')
+		if (input[idx + *token_len] == '\''
+			&& !is_escaped(input, idx + *token_len))
 		{
 			(*token_len)++;
 			return (0);
@@ -50,7 +51,8 @@ static int	skip_double_quote(char *input, int idx, int *token_len)
 			write(STDERR_FILENO, "Unclosed quote\n", 15);
 			return (-1);
 		}
-		if (input[idx + *token_len] == '\"')
+		if (input[idx + *token_len] == '\"'
+			&& !is_escaped(input, idx + *token_len))
 		{
 			(*token_len)++;
 			return (0);
@@ -61,6 +63,8 @@ static int	skip_double_quote(char *input, int idx, int *token_len)
 
 int	skip_quote(char *input, int idx, int *token_len)
 {
+	if (is_escaped(input, idx + *token_len))
+		return (1);
 	if (input[idx + *token_len] == '\"')
 		return (skip_double_quote(input, idx, token_len));
 	if (input[idx + *token_len] == '\'')

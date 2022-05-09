@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 17:01:45 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/03 16:05:30 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/09 12:03:16 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int	can_add_to_token(char *token, int token_len)
 		&& ((is_operator(&token[0], token_len)
 				&& is_operator(&token[0], token_len + 1))
 			|| (!is_operator(&token[0], token_len)
-				&& !is_operator(&token[token_len], 1))));
+				&& !(is_operator(&token[token_len], 1)
+					&& !is_escaped(token, token_len)))));
 }

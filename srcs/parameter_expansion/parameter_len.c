@@ -6,55 +6,55 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:34:50 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/06 11:29:27 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/09 12:21:19 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parameter_expansion.h"
 
-static int	parameter_len_no_brace(char *str)
+static int	parameter_len_no_brace(char *str, int start)
 {
 	int	len;
 
-	if (str[0] != '$')
+	if (str[start] != '$' || is_escaped(str, start))
 		return (0);
-	if (str[1] == '?')
+	if (str[start + 1] == '?')
 		return (2);
-	if (!is_valid_parameter(&str[1], 1))
+	if (!is_valid_parameter(&str[start + 1], 1))
 		return (0);
 	len = 2;
-	while (str[len] && is_valid_parameter(&str[1], len))
+	while (str[start + len] && is_valid_parameter(&str[start + 1], len))
 		len++;
 	return (len);
 }
 
-static int	parameter_len_brace(char *str)
+static int	parameter_len_brace(char *str, int start)
 {
 	int	len;
 	int	ret;
 
-	if (str[0] != '$' || str[1] != '{')
+	if (str[start] != '$' || str[start + 1] != '{' || is_escaped(str, start))
 		return (0);
 	len = 1;
 	while (1)
 	{
 		ret = 0;
 		while (ret == 0)
-			ret = skip_quote(str, 0, &len);
-		if (str[len] == '\0')
+			ret = skip_quote(str, start, &len);
+		if (str[start + len] == '\0')
 			return (-1);
-		if (str[len] == '}')
+		if (str[start + len] == '}' && !is_escaped(str, start + len))
 			return (len + 1);
 		len++;
 	}
 }
 
-int	parameter_len(char *str)
+int	parameter_len(char *str, int start)
 {
 	int	ret;
 
-	ret = parameter_len_no_brace(str);
+	ret = parameter_len_no_brace(str, start);
 	if (ret)
 		return (ret);
-	return (parameter_len_brace(str));
+	return (parameter_len_brace(str, start));
 }

@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 11:48:00 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/06 11:35:30 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/09 12:35:32 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	replace_parameter_brace(char **str, int *idx,
 	char	*value;
 	int		param_len;
 
-	param_len = parameter_len(&(*str)[*idx]);
+	param_len = parameter_len(*str, *idx);
 	if (param_len == -1)
 		return (bad_sub_message(&(*str)[*idx], prog_name, 0));
 	parameter = ft_substr(&(*str)[2], *idx, param_len - 3);
@@ -89,11 +89,12 @@ int	replace_parameter(char **str, int *idx, t_general_info *info)
 {
 	int	param_len;
 
-	param_len = parameter_len(&(*str)[*idx]);
+	param_len = parameter_len(*str, *idx);
 	if (!param_len)
 		return (0);
-	if (!ft_strncmp(&(*str)[*idx], "$?", 2)
-		|| !ft_strncmp(&(*str)[*idx], "${?}", 4))
+	if ((!ft_strncmp(&(*str)[*idx], "$?", 2)
+			|| !ft_strncmp(&(*str)[*idx], "${?}", 4))
+		&& !is_escaped(*str, *idx))
 		return (
 			replace_parameter_exit_code(str, info->exit_code, idx, param_len));
 	if ((*str)[(*idx) + 1] != '{')
