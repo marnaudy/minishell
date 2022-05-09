@@ -6,7 +6,7 @@
 #    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/05 18:43:12 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/05/09 11:16:32 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ NAME	=	minishell
 LIBFT	=	libft/libft.a
 
 SRCS	=	srcs/lexer/lexer_parameter.c \
+			srcs/lexer/is_escaped.c \
 			srcs/lexer/lexer_quote.c \
 			srcs/lexer/lexer_utils.c \
 			srcs/lexer/lexer.c \

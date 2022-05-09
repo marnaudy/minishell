@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 12:17:59 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/07 17:38:57 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/09 11:15:29 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	is_escaped_in_singles(char *str, int pos, int *idx)
 		(*idx)++;
 	}
 	return (!(str[*idx] == '\'' || (str[*idx] == '\\'
-				&& ft_is_in_charset(str[*idx + 1], "\'\\"))));
+				&& str[*idx + 1] == '\'')));
 }
 
 static int	is_escaped_in_doubles(char *str, int pos, int *idx)
@@ -120,21 +120,4 @@ int	is_escaped(char *str, int pos)
 		idx++;
 	}
 	return (0);
-}
-
-int	main()
-{
-	char	*input;
-	int		len;
-	int		i;
-
-	input = "\"${var}\\$\\\"\\\'${\"he\'\\\"llo\"\'bonj\"\\\'our\'}\"";
-	len = ft_strlen(input);
-	puts(input);
-	i = 0;
-	while (i < len)
-	{
-		printf("char %c is escaped : %i\n", input[i], is_escaped(input, i));
-		i++;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/06 11:26:57 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/09 11:16:52 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_general_info
 	int				exit_code;
 }	t_general_info;
 
+int				is_escaped(char *str, int pos);
 int				lexer(t_list **list, char *input, char *prog_name);
 int				check_syntax(t_list *token_list, char *prog_name);
 t_hash_table	*init_env_table(char **envp);
