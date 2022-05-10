@@ -1,39 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   here_doc.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 18:03:57 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/10 12:45:28 by marnaudy         ###   ########.fr       */
+/*   Created: 2022/05/10 11:48:40 by marnaudy          #+#    #+#             */
+/*   Updated: 2022/05/10 12:57:13 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+#ifndef HERE_DOC_H
+# define HERE_DOC_H
 
-char	*ft_strcat(char *s1, char *s2)
-{
-	char	*new;
-	int		i;
-	int		j;
+# include "minishell.h"
+# include <readline/readline.h>
+# include <unistd.h>
 
-	new = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!new)
-		return (NULL);
-	i = 0;
-	while (s1 && s1[i])
-	{
-		new[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2[j])
-	{
-		new[i + j] = s2[j];
-		j++;
-	}
-	new[i + j] = 0;
-	return (new);
-}
+int	add_delimiter(t_list *token_list, char *prog_name, t_doc_list **doc_list);
+int	get_delimiters(t_list *token_list, char *prog_name,
+		int nb_token, t_doc_list **doc_list);
+
+#endif

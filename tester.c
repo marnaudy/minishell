@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:31:52 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/09 15:59:58 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/10 15:05:55 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,17 @@ int	main(int argc, char **argv, char **envp)
 	t_list			*token_list;
 	char			*input;
 	int				ret;
+	int				syntax_ret;
 	t_hash_table	*table;
 	char			*value;
 	t_general_info	info;
 	unsigned int	i;
+	t_doc_list		*doc_list;
+	t_doc_list		*doc_list_save;
 
 	//Lexer and syntax test
 
-	input = "echo ${\"pro\\\"ut\" && } $& $var \\\'prout&&pouet && blqblq&bla ${{\\}baobab} \'blou\'\"blou\" \"${va\"r}\" \"}}}\"}\" bouet&&( cat&&&) || in $var$var ${var}${var} $prout \'$var\' \"$var\" \"$?var\"$va?r $$var? $DISPLAY \'$\'var $$$var $\"${var}\" echo $var ${var} $? ${\"var\"} | () \'$var\' \"\\\\\\\" \\\' ${\\\" \\\\ \\} \'\\\' \\a\' }\" p{var}";
+	input = "echo ${\"pro\\\"ut\" && } $& $var<<eof \\\'prout&&pouet && blqblq&bla ${{\\}baobab} \'blou\'\"blou\" \"${va\"r}\" \"}}}\"}\" bouet&&( cat&&&) || in $var$var ${var}${var} $prout \'$var\' \"$var\" \"$?var\"$va?r $$var? $DISPLAY \'$\'var $$$var $\"${var}\" echo $var ${var} $? ${\"var\"} << \"eo\\f\" | << () \'$var\' << eof \"\\\\\\\" \\\' ${\\\" \\\\ \\} \'\\\' \\a\' }\" p{var}";
 	i = 0;
 	while (i < ft_strlen(input))
 	{
@@ -37,8 +40,8 @@ int	main(int argc, char **argv, char **envp)
 	puts(input);
 	ret = lexer(&token_list, input, "prout");
 	printf("lexer return = %i\n", ret);
-	ret = check_syntax(token_list, "prout");
-	printf("check_syntax return = %i\n", ret);
+	syntax_ret = check_syntax(token_list, "prout");
+	printf("check_syntax return = %i\n", syntax_ret);
 	list_save = token_list;
 	while (token_list)
 	{
@@ -85,13 +88,26 @@ int	main(int argc, char **argv, char **envp)
 	token_list = list_save;
 	while (token_list)
 	{
-		ret = quote_removal(((char *)token_list->content));
+		ret = quote_removal(((char *)token_list->content), "prout");
 		printf("return = %i, token = %s\n", ret, (char *)token_list->content);
 		token_list = token_list->next;
 	}
 
+	// Read heredocs
+	printf("----Here docs-----------------------------------------------------\n");
+	token_list = list_save;
+	ret = read_all_here_docs(token_list, "prout", syntax_ret, &doc_list);
+	doc_list_save = doc_list;
+	printf("return = %i\n", ret);
+	while (doc_list)
+	{
+		printf("heredoc = _%s_ is_quote = %i\n", doc_list->content, doc_list->is_quoted);
+		doc_list = doc_list->next;
+	}
+
 	ft_lstclear(&list_save, &free);
 	free_hash_table(table);
+	ft_doc_lstclear(&doc_list_save);
 }
 
 // int	parameter_len(char *str);

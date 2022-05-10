@@ -6,7 +6,7 @@
 #    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/09 16:00:25 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/05/10 14:51:01 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,9 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/parameter_expansion/replace_parameter.c \
 			srcs/parameter_expansion/replace_all_parameters.c \
 			srcs/quote_removal/quote_removal.c \
+			srcs/here_doc/add_delimiter.c \
+			srcs/here_doc/get_delimiters.c \
+			srcs/here_doc/read_here_doc.c \
 			tester.c
 
 HEADERS	=	lexer.h \
@@ -51,7 +54,7 @@ RM		=	rm -f
 all:		${NAME}
 
 ${NAME}:	${OBJS} ${LIBFT}
-			${CC} ${OBJS} ${LIBFT} -o ${NAME}
+			${CC} ${OBJS} ${LIBFT} -lreadline -o ${NAME}
 
 ${LIBFT}:
 			make -C libft

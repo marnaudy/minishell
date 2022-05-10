@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/09 17:18:44 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:56:06 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 # include "../libft/libft.h"
 # include "environment.h"
 # include <stdio.h>
+
+typedef struct s_doc_list
+{
+	char				*content;
+	int					is_quoted;
+	struct s_doc_list	*next;
+}	t_doc_list;
 
 typedef struct s_general_info
 {
@@ -38,5 +45,8 @@ int				skip_quote(char *input, int idx, int *token_len);
 int				replace_all_parameters(char **str, t_general_info *info,
 					int ignore_quotes);
 int				quote_removal(char *token, char *prog_name);
+void			ft_doc_lstclear(t_doc_list **lst);
+int				read_all_here_docs(t_list *token_list, char *prog_name,
+					int nb_token, t_doc_list **doc_list);
 
 #endif
