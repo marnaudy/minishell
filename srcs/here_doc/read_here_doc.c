@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:51:15 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/10 14:48:13 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/11 14:09:28 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static int	print_delimiter_error(char *delimiter, char *prog_name)
 	char	*to_print;
 	char	*to_free;
 
-	
-	to_free = ft_strcat(prog_name, ": warning: here-document delimited by end-of-file (wanted `");
+	to_free = ft_strcat(prog_name,
+			": warning: here-document delimited by end-of-file (wanted `");
 	if (!to_free)
 		return (-1);
 	to_print = ft_strcat(to_free, delimiter);
@@ -82,7 +82,7 @@ static int	read_here_doc(t_doc_list *doc, char *prog_name)
 	}
 	ret = 0;
 	if (!input)
-		ret = print_delimiter_error(delimiter, prog_name);	
+		ret = print_delimiter_error(delimiter, prog_name);
 	free(input);
 	free(delimiter);
 	return (ret);
