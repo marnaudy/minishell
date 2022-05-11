@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/11 14:19:10 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/11 14:57:44 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ enum e_operator
 	outfile,
 	appendout,
 	here_doc,
+	open_p,
+	close_p,
 	and,
 	or,
 	conduit
@@ -51,7 +53,7 @@ typedef struct s_tree
 	char			*outfile;
 	short int		append_output;
 	t_doc_list		*here_doc;
-	struct s_tree	*pipe_children;
+	struct s_tree	**pipe_children;
 	struct s_tree	*left;
 	struct s_tree	*right;
 }	t_tree;
@@ -73,5 +75,6 @@ int				quote_removal(char *token, char *prog_name);
 void			ft_doc_lstclear(t_doc_list **lst);
 int				read_all_here_docs(t_list *token_list, char *prog_name,
 					int nb_token, t_doc_list **doc_list);
+void			free_tree(t_tree **tree);
 
 #endif
