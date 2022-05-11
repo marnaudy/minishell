@@ -6,7 +6,7 @@
 #    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/10 14:51:01 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/05/11 14:16:31 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,9 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/here_doc/add_delimiter.c \
 			srcs/here_doc/get_delimiters.c \
 			srcs/here_doc/read_here_doc.c \
+			srcs/parser/parser_utils.c \
+			srcs/parser/add_redirection.c \
+			srcs/parser/new_command_node.c \
 			tester.c
 
 HEADERS	=	lexer.h \

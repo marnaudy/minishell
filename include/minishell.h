@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/10 14:56:06 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/11 14:19:10 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,31 @@ typedef struct s_general_info
 	t_hash_table	*table;
 	int				exit_code;
 }	t_general_info;
+
+enum e_operator
+{
+	nothing,
+	infile,
+	outfile,
+	appendout,
+	here_doc,
+	and,
+	or,
+	conduit
+};
+
+typedef struct s_tree
+{
+	enum e_operator	type;
+	t_list			*arg;
+	char			*infile;
+	char			*outfile;
+	short int		append_output;
+	t_doc_list		*here_doc;
+	struct s_tree	*pipe_children;
+	struct s_tree	*left;
+	struct s_tree	*right;
+}	t_tree;
 
 int				is_escaped(char *str, int pos);
 int				lexer(t_list **list, char *input, char *prog_name);
