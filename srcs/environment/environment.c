@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:30:49 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/04 16:28:00 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:41:17 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ int	add_to_table(t_hash_table *table, char *key, char *value)
 				return (-1);
 		}
 		return (add_to_table(table->next, key, value));
+	}
+	if (table->data[hash].key)
+	{
+		free(table->data[hash].key);
+		free(table->data[hash].value);
 	}
 	table->data[hash].key = key;
 	table->data[hash].value = value;
