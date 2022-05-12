@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:31:52 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/12 12:06:12 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:21:53 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ int	main(int argc, char **argv, char **envp)
 
 	//Lexer and syntax test
 
-	input = "echo ${\"pro\\\"ut\" && } $& $var<<eof \\\'prout&&pouet && blqblq&bla ${{\\}baobab} \'blou\'\"blou\" \"${va\"r}\" \"}}}\"}\" bouet&&( cat&&&) || in $var$var ${var}${var} $prout \'$var\' \"$var\" \"$?var\"$va?r $$var? $DISPLAY \'$\'var $$$var $\"${var}\" echo $var ${var} $? ${\"var\"} |  \'$var\' \"\\\\\\\" \\\' ${\\\" \\\\ \\} \'\\\' \\a\' }\" p{var}";
-	// input = "echo a < in >out>out2 && echo b>>out << eof || echo c< in < in2 | cat -e && (ls || ls)";
+	// input = "echo ${\"pro\\\"ut\" && } $& $var<<eof \\\'prout&&pouet && blqblq&bla ${{\\}baobab} \'blou\'\"blou\" \"${va\"r}\" \"}}}\"}\" bouet&&( cat&&&) || in $var$var ${var}${var} $prout \'$var\' \"$var\" \"$?var\"$va?r $$var? $DISPLAY \'$\'var $$$var $\"${var}\" echo $var ${var} $? ${\"var\"} |  \'$var\' \"\\\\\\\" \\\' ${\\\" \\\\ \\} \'\\\' \\a\' }\" p{var}";
+	// input = "echo a < in >out>out2 && (echo b>>out << eof) | echo a | echo b <<out  || echo c< in < in2 | cat -e || (ls || ls) < in";
+	input = "(echo a && echo b) | cat";
 	i = 0;
 	while (i < ft_strlen(input))
 	{
@@ -106,7 +107,13 @@ int	main(int argc, char **argv, char **envp)
 		printf("heredoc = _%s_ is_quote = %i\n", doc_list->content, doc_list->is_quoted);
 		doc_list = doc_list->next;
 	}
-
+	if (syntax_ret)
+	{
+		ft_lstclear(&list_save, &free);
+		ft_doc_lstclear(&doc_list_save);
+		free_hash_table(table);
+		return (0);
+	}
 	// Parse token list
 	printf("----Parsing-----------------------------------------------------\n");
 	token_list = list_save;
@@ -118,12 +125,3 @@ int	main(int argc, char **argv, char **envp)
 	free_tree(&tree);
 	free_hash_table(table);
 }
-
-// int	parameter_len(char *str);
-
-// int main(int argc, char **argv)
-// {
-// 	(void) argc;
-// 	(void) argv;
-// 	printf("%i\n", parameter_len("$var\""));
-// }

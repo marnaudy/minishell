@@ -6,13 +6,13 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:12:07 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/12 11:02:21 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:04:35 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	add_infile(t_tree *tree, t_list **token_list)
+static void	add_infile(t_tree *tree, t_list **token_list)
 {
 	t_list	*save;
 
@@ -35,7 +35,7 @@ void	add_infile(t_tree *tree, t_list **token_list)
 	free(save);
 }
 
-void	add_outfile(t_tree *tree, t_list **token_list)
+static void	add_outfile(t_tree *tree, t_list **token_list)
 {
 	t_list	*save;
 
@@ -54,7 +54,8 @@ void	add_outfile(t_tree *tree, t_list **token_list)
 	free(save);
 }
 
-void	add_here_doc(t_tree *tree, t_list **token_list, t_doc_list **doc_list)
+static void	add_here_doc(t_tree *tree,
+				t_list **token_list, t_doc_list **doc_list)
 {
 	if (tree->infile)
 	{
@@ -72,4 +73,18 @@ void	add_here_doc(t_tree *tree, t_list **token_list, t_doc_list **doc_list)
 	tree->here_doc->next = NULL;
 	del_first_token(token_list);
 	del_first_token(token_list);
+}
+
+void	add_redirection(t_tree *node,
+			t_list **token_list, t_doc_list **doc_list)
+{
+	enum e_operator	op_type;
+
+	op_type = operator_type((char *)(*token_list)->content);
+	if (op_type == infile)
+		add_infile(node, token_list);
+	if (op_type == outfile || op_type == appendout)
+		add_outfile(node, token_list);
+	if (op_type == here_doc)
+		add_here_doc(node, token_list, doc_list);
 }

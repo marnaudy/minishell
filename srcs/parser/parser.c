@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:33:55 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/12 12:43:43 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:22:29 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,19 @@
 
 void	add_to_node(t_tree **working_node, t_tree *new_node)
 {
+	int	i;
+
 	if (!*working_node)
 	{
 		*working_node = new_node;
+		return ;
+	}
+	if ((*working_node)->type == conduit)
+	{
+		i = 0;
+		while ((*working_node)->pipe_children[i])
+			i++;
+		(*working_node)->pipe_children[i] = new_node;
 		return ;
 	}
 	if ((*working_node)->left)
@@ -36,7 +46,7 @@ static int	free_error(t_tree **root,
 
 static t_tree	**get_working_node(t_tree **root)
 {
-	if (!(*root)->type)
+	if (!(*root)->type || (*root)->type == open_p)
 		return (root);
 	return (&(*root)->right);
 }

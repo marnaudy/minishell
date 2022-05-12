@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/12 11:52:32 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 12:59:14 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int				quote_removal(char *token, char *prog_name);
 void			ft_doc_lstclear(t_doc_list **lst);
 int				read_all_here_docs(t_list *token_list, char *prog_name,
 					int nb_token, t_doc_list **doc_list);
+enum e_operator	operator_type(char *token);
 void			free_tree(t_tree **tree);
 int				parser(t_tree **root, t_list **tk_list,
 					t_doc_list **doc_list, char *prog_name);

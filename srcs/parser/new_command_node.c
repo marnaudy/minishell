@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:13:53 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/11 14:14:37 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:23:41 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,8 @@ t_tree	*new_command_node(t_list **token_list, t_doc_list **doc_list,
 	{
 		if (op_type == nothing)
 			add_token_to_arg(token_list, &new_tree->arg);
-		if (op_type == infile)
-			add_infile(new_tree, token_list);
-		if (op_type == outfile || op_type == appendout)
-			add_outfile(new_tree, token_list);
-		if (op_type == here_doc)
-			add_here_doc(new_tree, token_list, doc_list);
+		else
+			add_redirection(new_tree, token_list, doc_list);
 		if (*token_list)
 			op_type = operator_type((char *)(*token_list)->content);
 	}

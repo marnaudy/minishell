@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:23:45 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/12 10:52:44 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:17:33 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	count_pipes(t_list *token_list)
 	return (count);
 }
 
-static int	add_pipe_children(t_tree *pipe_node, t_list **token_list,
+static int	add_pipe_children(t_tree **pipe_node, t_list **token_list,
 				t_doc_list **doc_list, char *prog_name)
 {
 	int		i;
@@ -54,13 +54,21 @@ static int	add_pipe_children(t_tree *pipe_node, t_list **token_list,
 	while (i < nb_children)
 	{
 		del_first_token(token_list);
-		pipe_node->pipe_children[i]
-			= new_command_node(token_list, doc_list, prog_name);
-		if (!pipe_node->pipe_children[i])
-			return (-1);
+		if (operator_type((char *)(*token_list)->content) == nothing)
+		{
+			(*pipe_node)->pipe_children[i]
+				= new_command_node(token_list, doc_list, prog_name);
+			if (!(*pipe_node)->pipe_children[i])
+				return (-1);
+		}
+		else
+		{
+			if (add_parentheses(pipe_node, token_list, doc_list, prog_name))
+				return (-1);
+		}	
 		i++;
 	}
-	pipe_node->pipe_children[i] = NULL;
+	(*pipe_node)->pipe_children[i] = NULL;
 	return (0);
 }
 
@@ -80,7 +88,7 @@ int	add_pipe(t_tree **working_node, t_list **token_list, t_doc_list **doc_list,
 		return (-1);
 	}
 	new_node->pipe_children[0] = *working_node;
-	if (add_pipe_children(new_node, token_list, doc_list, prog_name))
+	if (add_pipe_children(&new_node, token_list, doc_list, prog_name))
 	{
 		free_tree(&new_node);
 		*working_node = NULL;

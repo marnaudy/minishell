@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:16:19 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/06 14:08:43 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 14:47:38 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,12 @@ static int	print_error_message(t_list *token, char *prog_name)
 static int	error_printer_error_checker(t_list *token_list,
 	char *prog_name, int next, int token_number)
 {
-	int	ret;
-
-	if (next)
-		ret = print_error_message(token_list->next, prog_name);
-	else
-		ret = print_error_message(token_list, prog_name);
-	if (ret)
+	while (next && token_list)
+	{
+		token_list = token_list->next;
+		next--;
+	}
+	if (print_error_message(token_list, prog_name))
 	{
 		perror(prog_name);
 		return (-1);
@@ -71,6 +70,7 @@ int	check_syntax(t_list *token_list, char *prog_name)
 {
 	int	nb_open_parentheses;
 	int	token_number;
+	int	ret;
 
 	nb_open_parentheses = 0;
 	token_number = 1;
@@ -81,9 +81,10 @@ int	check_syntax(t_list *token_list, char *prog_name)
 		if (update_parenthesis_count(token_list, &nb_open_parentheses))
 			return (error_printer_error_checker(token_list,
 					prog_name, 0, token_number));
-		if (check_next_global(token_list))
+		ret = check_next_global(token_list);
+		if (ret)
 			return (error_printer_error_checker(token_list,
-					prog_name, 1, token_number));
+					prog_name, ret, token_number + ret));
 		token_list = token_list->next;
 		token_number++;
 	}
