@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/12 15:37:19 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 17:07:55 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ void			free_tree(t_tree **tree);
 int				parser(t_tree **root, t_list **tk_list,
 					t_doc_list **doc_list, char *prog_name);
 void			print_tree(t_tree *tree);
+int				field_splitting(t_list *list);
 
 #endif

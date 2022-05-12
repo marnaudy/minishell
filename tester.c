@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:31:52 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/12 15:48:39 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 17:10:52 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,17 @@ int	main(int argc, char **argv, char **envp)
 	ret = replace_all_parameters(&input, &info, 1);
 	printf("return = %i, token = %s\n", ret, input);
 	free(input);
+
+	// Field Splitting
+	printf("----Field Splitting-----------------------------------------------------\n");
+	ret = field_splitting(list_save);
+	printf("return = %i\n", ret);
+	token_list = list_save;
+	while (token_list)
+	{
+		printf("token = %s\n", (char *)token_list->content);
+		token_list = token_list->next;
+	}
 
 	// Quote removal
 	printf("----Quote removal-----------------------------------------------------\n");

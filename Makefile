@@ -6,7 +6,7 @@
 #    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/12 12:42:48 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/05/12 17:18:01 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,12 +43,17 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/parser/add_parentheses.c \
 			srcs/parser/parser.c \
 			srcs/parser/tree_printer.c \
+			srcs/field_splitting/field_splitting.c \
 			tester.c
 
-HEADERS	=	lexer.h \
-			syntax_error.h \
-			environment.h \
-			minishell.h
+HEADERS	=	include/lexer.h \
+			include/syntax_error.h \
+			include/environment.h \
+			include/parameter_expansion.h \
+			include/quote_removal.h \
+			include/here_doc.h \
+			include/parser.h \
+			include/minishell.h
 
 OBJS	=	${SRCS:.c=.o}
 
