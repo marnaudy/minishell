@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 12:17:59 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/09 11:15:29 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:45:31 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,9 @@ static int	is_escaped_in_singles(char *str, int pos, int *idx)
 	{
 		if (str[*idx] == '\'')
 			return (-1);
-		if (str[*idx] == '\\')
-		{
-			if (*idx + 1 == pos)
-				return (1);
-			(*idx)++;
-		}
 		(*idx)++;
 	}
-	return (!(str[*idx] == '\'' || (str[*idx] == '\\'
-				&& str[*idx + 1] == '\'')));
+	return (!(str[*idx] == '\''));
 }
 
 static int	is_escaped_in_doubles(char *str, int pos, int *idx)

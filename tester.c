@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:31:52 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/12 15:21:53 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:48:39 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	main(int argc, char **argv, char **envp)
 
 	//Lexer and syntax test
 
-	// input = "echo ${\"pro\\\"ut\" && } $& $var<<eof \\\'prout&&pouet && blqblq&bla ${{\\}baobab} \'blou\'\"blou\" \"${va\"r}\" \"}}}\"}\" bouet&&( cat&&&) || in $var$var ${var}${var} $prout \'$var\' \"$var\" \"$?var\"$va?r $$var? $DISPLAY \'$\'var $$$var $\"${var}\" echo $var ${var} $? ${\"var\"} |  \'$var\' \"\\\\\\\" \\\' ${\\\" \\\\ \\} \'\\\' \\a\' }\" p{var}";
+	input = "echo ${\"pro\\\"ut\" && } $& $var<<eof \\\'prout&&pouet && blqblq&bla ${{\\}baobab} \'bl\\\' \'ou\'\"blou\" \"${va\"r}\" \"}}}\"}\" bouet&&( cat&&&) || in $var$var ${var}${var} $prout \'$var\' \"$var\" \"$?var\"$va?r $$var? $DISPLAY \'$\'var $$$var $\"${var}\" echo $var ${var} $? ${\"var\"} |  \'$var\' \"\\\\\\\" \\\' ${\\\" \\\\ \\} \'\\ \\a\' }\" p{var}";
 	// input = "echo a < in >out>out2 && (echo b>>out << eof) | echo a | echo b <<out  || echo c< in < in2 | cat -e || (ls || ls) < in";
-	input = "(echo a && echo b) | cat";
+	// input = "(echo a && echo b) | cat";
 	i = 0;
 	while (i < ft_strlen(input))
 	{
