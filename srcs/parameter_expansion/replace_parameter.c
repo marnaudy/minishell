@@ -6,16 +6,17 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 11:48:00 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/09 15:01:33 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:36:54 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parameter_expansion.h"
 
-static int	free_and_ret(char *s1, int ret)
+int	free_and_ret(char *s1, char *s2, int ret)
 {
 	free(s1);
+	free(s2);
 	return (ret);
 }
 
@@ -30,7 +31,7 @@ static int	replace_parameter_exit_code(char **str, int exit_code,
 		return (-1);
 	new_str = replace_in_str(*str, *idx, param_len, value);
 	if (!new_str)
-		return (free_and_ret(value, -1));
+		return (free_and_ret(value, NULL, -1));
 	(*idx) += ft_strlen(value) - 1;
 	free(value);
 	free(*str);
@@ -51,11 +52,11 @@ static int	replace_parameter_no_brace(char **str, int *idx,
 	value = fetch_value(table, parameter);
 	new_str = replace_in_str(*str, *idx, param_len, value);
 	if (!new_str)
-		return (free_and_ret(parameter, -1));
+		return (free_and_ret(parameter, NULL, -1));
 	(*idx) += ft_strlen(value) - 1;
 	free(*str);
 	*str = new_str;
-	return (free_and_ret(parameter, add_backslash(str,
+	return (free_and_ret(parameter, NULL, add_backslash(str,
 				*idx + 1 - ft_strlen(value), ft_strlen(value))));
 }
 
@@ -74,16 +75,16 @@ static int	replace_parameter_brace(char **str, int *idx,
 	if (!parameter)
 		return (-1);
 	if (!is_valid_parameter(parameter, -1))
-		return (free_and_ret(parameter,
+		return (free_and_ret(parameter, NULL,
 				bad_sub_message(parameter, prog_name, 1)));
 	value = fetch_value(table, parameter);
 	new_str = replace_in_str(*str, *idx, param_len, value);
 	if (!new_str)
-		return (free_and_ret(parameter, -1));
+		return (free_and_ret(parameter, NULL, -1));
 	(*idx) += ft_strlen(value) - 1;
 	free(*str);
 	*str = new_str;
-	return (free_and_ret(parameter, add_backslash(str,
+	return (free_and_ret(parameter, NULL, add_backslash(str,
 				*idx + 1 - ft_strlen(value), ft_strlen(value))));
 }
 

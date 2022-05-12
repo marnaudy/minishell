@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/12 12:59:14 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:37:19 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_tree
 	struct s_tree	*right;
 }	t_tree;
 
+int				free_and_ret(char *s1, char *s2, int ret);
 int				is_escaped(char *str, int pos);
 int				lexer(t_list **list, char *input, char *prog_name);
 int				check_syntax(t_list *token_list, char *prog_name);
