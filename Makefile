@@ -6,7 +6,7 @@
 #    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/11 15:24:50 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/05/12 12:42:48 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,9 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/parser/add_redirection.c \
 			srcs/parser/new_command_node.c \
 			srcs/parser/add_operator.c \
+			srcs/parser/add_parentheses.c \
+			srcs/parser/parser.c \
+			srcs/parser/tree_printer.c \
 			tester.c
 
 HEADERS	=	lexer.h \

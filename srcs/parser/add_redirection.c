@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:12:07 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/11 14:19:38 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 11:02:21 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ void	add_outfile(t_tree *tree, t_list **token_list)
 
 void	add_here_doc(t_tree *tree, t_list **token_list, t_doc_list **doc_list)
 {
-	t_list	*save;
-
 	if (tree->infile)
 	{
 		free(tree->infile);
@@ -72,10 +70,6 @@ void	add_here_doc(t_tree *tree, t_list **token_list, t_doc_list **doc_list)
 	tree->here_doc = *doc_list;
 	*doc_list = (*doc_list)->next;
 	tree->here_doc->next = NULL;
-	save = *token_list;
-	free((*token_list)->content);
-	free((*token_list));
-	*token_list = save->next;
-	free(save->content);
-	free(save);
+	del_first_token(token_list);
+	del_first_token(token_list);
 }

@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 11:33:31 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/11 15:23:12 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 11:52:59 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	free_tree(t_tree **tree)
 	free((*tree)->pipe_children);
 	ft_lstclear(&(*tree)->arg, &free);
 	ft_doc_lstclear(&(*tree)->here_doc);
-	free((*tree)->pipe_children);
 	free((*tree)->infile);
 	free((*tree)->outfile);
 	free(*tree);

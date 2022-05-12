@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 11:33:32 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/11 15:22:22 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 12:44:04 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ t_tree			*new_command_node(t_list **token_list, t_doc_list **doc_list,
 					char *prog_name);
 int				add_andor(t_tree **root, t_list **token_list, char *prog_name);
 int				add_pipe(t_tree **working_node, t_list **token_list,
+					t_doc_list **doc_list, char *prog_name);
+void			add_to_node(t_tree **working_node, t_tree *new_node);
+int				add_parentheses(t_tree **root, t_list **token_list,
 					t_doc_list **doc_list, char *prog_name);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:31:52 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/10 15:05:55 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/12 12:06:12 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ int	main(int argc, char **argv, char **envp)
 	unsigned int	i;
 	t_doc_list		*doc_list;
 	t_doc_list		*doc_list_save;
+	t_tree			*tree;
 
 	//Lexer and syntax test
 
-	input = "echo ${\"pro\\\"ut\" && } $& $var<<eof \\\'prout&&pouet && blqblq&bla ${{\\}baobab} \'blou\'\"blou\" \"${va\"r}\" \"}}}\"}\" bouet&&( cat&&&) || in $var$var ${var}${var} $prout \'$var\' \"$var\" \"$?var\"$va?r $$var? $DISPLAY \'$\'var $$$var $\"${var}\" echo $var ${var} $? ${\"var\"} << \"eo\\f\" | << () \'$var\' << eof \"\\\\\\\" \\\' ${\\\" \\\\ \\} \'\\\' \\a\' }\" p{var}";
+	input = "echo ${\"pro\\\"ut\" && } $& $var<<eof \\\'prout&&pouet && blqblq&bla ${{\\}baobab} \'blou\'\"blou\" \"${va\"r}\" \"}}}\"}\" bouet&&( cat&&&) || in $var$var ${var}${var} $prout \'$var\' \"$var\" \"$?var\"$va?r $$var? $DISPLAY \'$\'var $$$var $\"${var}\" echo $var ${var} $? ${\"var\"} |  \'$var\' \"\\\\\\\" \\\' ${\\\" \\\\ \\} \'\\\' \\a\' }\" p{var}";
+	// input = "echo a < in >out>out2 && echo b>>out << eof || echo c< in < in2 | cat -e && (ls || ls)";
 	i = 0;
 	while (i < ft_strlen(input))
 	{
@@ -105,9 +107,16 @@ int	main(int argc, char **argv, char **envp)
 		doc_list = doc_list->next;
 	}
 
-	ft_lstclear(&list_save, &free);
+	// Parse token list
+	printf("----Parsing-----------------------------------------------------\n");
+	token_list = list_save;
+	doc_list = doc_list_save;
+	ret = parser(&tree, &token_list, &doc_list, "prout");
+	printf("return = %i, tree = %p\n", ret, tree);
+	print_tree(tree);
+
+	free_tree(&tree);
 	free_hash_table(table);
-	ft_doc_lstclear(&doc_list_save);
 }
 
 // int	parameter_len(char *str);
