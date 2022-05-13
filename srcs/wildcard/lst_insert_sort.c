@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_base_path.c                                    :+:      :+:    :+:   */
+/*   lst_insert_sort.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/13 15:25:37 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/05/13 15:30:02 by cboudrin         ###   ########.fr       */
+/*   Created: 2022/05/13 15:31:06 by cboudrin          #+#    #+#             */
+/*   Updated: 2022/05/13 16:15:51 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wildcard.h"
 
-int	get_base_path(char *word, char **base_path)
+int	advanced_ft_strcmp(char *s1, char *s2)
 {
 	int	i;
 
 	i = 0;
-	while (word[i] && word[i] != '/')
+	while (s1[i] && s2[i] && ft_toupper(s1[i]) == ft_toupper(s2[i]))
 		i++;
-	*base_path = NULL;
-	if (i == 0)
-		return (0);
-	*base_path = ft_strsub(word, 0, i);
-	if (!*base_path)
-		return (-1);
-	return (0);
+	return (ft_toupper(s1[i]) - ft_toupper(s2[i]));
+}
+
+void	lst_insert_sort(t_list **list, t_list *new)
+{
+	if (!*list)
+	{
+		*list = new;
+		return ;
+	}
+	if (advanced_ft_strcmp((char *)(*list)->content, (char *)new->content) > 0)
+	{
+		new->next = *list;
+		*list = new;
+		return ;
+	}
+	lst_insert_sort(&(*list)->next, new);
 }

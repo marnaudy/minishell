@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
+#    By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/12 17:18:01 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/05/13 14:39:38 by cboudrin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/parser/parser.c \
 			srcs/parser/tree_printer.c \
 			srcs/field_splitting/field_splitting.c \
+			srcs/wildcard/is_match.c \
 			tester.c
 
 HEADERS	=	include/lexer.h \
