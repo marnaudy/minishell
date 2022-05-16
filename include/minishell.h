@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/13 16:38:33 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/16 12:13:23 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ int				parser(t_tree **root, t_list **tk_list,
 					t_doc_list **doc_list, char *prog_name);
 void			print_tree(t_tree *tree);
 int				field_splitting(t_list *list);
+int				expand_wildcards(t_list *list, char *prog_name);
 
 #endif
