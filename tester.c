@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:31:52 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/16 12:37:26 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:05:17 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,25 @@ int	main(int argc, char **argv, char **envp)
 	printf("return = %i, tree = %p\n", ret, tree);
 	print_tree(tree);
 
+	// Search path
+	printf("----Path-----------------------------------------------------\n");
+	char	*arr[] = {
+		"cat",
+		"ls",
+		"bidule",
+		"./bidule",
+		NULL
+	};
+	i = 0;
+	while (arr[i])
+	{
+		ret = search_path(arr[i], &value, table, "prout");
+		printf("return = %i, in = _%s_, out = _%s_\n", ret, arr[i], value);
+		if (arr[i] != value)
+			free(value);
+		i++;
+	}
+	
 	free_tree(&tree);
 	free_hash_table(table);
 }

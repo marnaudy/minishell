@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/16 12:13:23 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/16 16:47:32 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libft/libft.h"
 # include "environment.h"
 # include <stdio.h>
+# include <unistd.h>
 
 typedef struct s_doc_list
 {
@@ -83,5 +84,7 @@ int				parser(t_tree **root, t_list **tk_list,
 void			print_tree(t_tree *tree);
 int				field_splitting(t_list *list);
 int				expand_wildcards(t_list *list, char *prog_name);
+int				search_path(char *arg0, char **path,
+					t_hash_table *table, char *prog_name);
 
 #endif

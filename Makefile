@@ -6,7 +6,7 @@
 #    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/16 12:15:32 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/05/16 17:09:16 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,9 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/wildcard/get_directory.c \
 			srcs/wildcard/is_match.c \
 			srcs/wildcard/wildcard.c \
+			srcs/path_search/split_path.c \
+			srcs/path_search/path_search_utils.c \
+			srcs/path_search/path_search.c \
 			tester.c
 
 HEADERS	=	include/lexer.h \
