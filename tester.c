@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:31:52 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/16 17:05:17 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/18 14:51:09 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv, char **envp)
 
 	//Lexer and syntax test
 
-	input = "echo ${\"pro\\\"ut\" && } $& $var<<eof \\\'prout&&pouet && blqblq&bla ${{\\}baobab} \'bl\\\' \'ou\'\"blou\" \"${va\"r}\" \"}}}\"}\" bouet&&( cat&&&) || in $var$var ${var}${var} $prout \'$var\' \"$var\" \"$?var\"$va?r $$var? $DISPLAY \'$\'var $$$var $\"${var}\" echo $var ${var} $? ${\"var\"} |  \'$var\' \"\\\\\\\" \\\' ${\\\" \\\\ \\} \'\\ \\a\' }\" p{var} * ************* *e* ../* machin*bidule */* \\*\"*\"\'*\'";
+	input = "echo ${\"pro\\\"ut\" && } $& $var<<eof \\\'prout&&pouet && blqblq&bla $b \"$b\" ${{\\}baobab} \'bl\\\' \'ou\'\"blou\" \"${va\"r}\" \"}}}\"}\" bouet&&( cat&&&) || in $var$var ${var}${var} $prout \'$var\' \"$var\" \"$?var\"$va?r $$var? $DISPLAY \'$\'var $$$var $\"${var}\" echo $var ${var} $? ${\"var\"} |  \'$var\' \"\\\\\\\" \\\' ${\\\" \\\\ \\} \'\\ \\a\' }\" p{var} * ************* *e* ../* machin*bidule */* \\*\"*\"\'*\'";
 	// input = "echo a < in >out>out2 && (echo b>>out << eof) | echo a | echo b <<out  || echo c< in < in2 | cat -e || (ls || ls) < in";
 	// input = "(echo a && echo b) | cat";
 	i = 0;
@@ -89,12 +89,12 @@ int	main(int argc, char **argv, char **envp)
 
 	// Field Splitting
 	printf("----Field Splitting-----------------------------------------------------\n");
-	ret = field_splitting(list_save);
+	ret = field_splitting(&list_save, "prout");
 	printf("return = %i\n", ret);
 	token_list = list_save;
 	while (token_list)
 	{
-		printf("token = %s\n", (char *)token_list->content);
+		printf("token = _%s_\n", (char *)token_list->content);
 		token_list = token_list->next;
 	}
 
