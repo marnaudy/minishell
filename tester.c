@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:31:52 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/18 14:51:09 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/18 16:26:19 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ int	main(int argc, char **argv, char **envp)
 
 	//Lexer and syntax test
 
-	input = "echo ${\"pro\\\"ut\" && } $& $var<<eof \\\'prout&&pouet && blqblq&bla $b \"$b\" ${{\\}baobab} \'bl\\\' \'ou\'\"blou\" \"${va\"r}\" \"}}}\"}\" bouet&&( cat&&&) || in $var$var ${var}${var} $prout \'$var\' \"$var\" \"$?var\"$va?r $$var? $DISPLAY \'$\'var $$$var $\"${var}\" echo $var ${var} $? ${\"var\"} |  \'$var\' \"\\\\\\\" \\\' ${\\\" \\\\ \\} \'\\ \\a\' }\" p{var} * ************* *e* ../* machin*bidule */* \\*\"*\"\'*\'";
+	// input = "echo ${\"pro\\\"ut\" && } $& $var<<eof \\\'prout&&pouet && blqblq&bla $b \"$b\" ${{\\}baobab} \'bl\\\' \'ou\'\"blou\" \"${va\"r}\" \"}}}\"}\" bouet&&( cat&&&) || in $var$var ${var}${var} $prout \'$var\' \"$var\" \"$?var\"$va?r $$var? $DISPLAY \'$\'var $$$var $\"${var}\" echo $var ${var} $? ${\"var\"} |  \'$var\' \"\\\\\\\" \\\' ${\\\" \\\\ \\} \'\\ \\a\' }\" p{var} * ************* *e* ../* machin*bidule */* \\*\"*\"\'*\'";
 	// input = "echo a < in >out>out2 && (echo b>>out << eof) | echo a | echo b <<out  || echo c< in < in2 | cat -e || (ls || ls) < in";
 	// input = "(echo a && echo b) | cat";
+	input = "cat -e $var \"$var\" < in << eo\\f > out >>out2";
 	i = 0;
 	while (i < ft_strlen(input))
 	{
@@ -75,28 +76,28 @@ int	main(int argc, char **argv, char **envp)
 	info.exit_code = 12;
 	info.prog_name = "prout";
 	info.table = table;
-	token_list = list_save;
-	while (token_list)
-	{
-		ret = replace_all_parameters((char **) &token_list->content, &info, 0);
-		printf("return = %i, token = %s\n", ret, (char *)token_list->content);
-		token_list = token_list->next;
-	}
-	input = ft_strdup("\'${blaploufproutbla\n");
-	ret = replace_all_parameters(&input, &info, 1);
-	printf("return = %i, token = %s\n", ret, input);
-	free(input);
+	// token_list = list_save;
+	// while (token_list)
+	// {
+	// 	ret = replace_all_parameters((char **) &token_list->content, &info, 0);
+	// 	printf("return = %i, token = %s\n", ret, (char *)token_list->content);
+	// 	token_list = token_list->next;
+	// }
+	// input = ft_strdup("\'${blaploufproutbla\n");
+	// ret = replace_all_parameters(&input, &info, 1);
+	// printf("return = %i, token = %s\n", ret, input);
+	// free(input);
 
-	// Field Splitting
-	printf("----Field Splitting-----------------------------------------------------\n");
-	ret = field_splitting(&list_save, "prout");
-	printf("return = %i\n", ret);
-	token_list = list_save;
-	while (token_list)
-	{
-		printf("token = _%s_\n", (char *)token_list->content);
-		token_list = token_list->next;
-	}
+	// // Field Splitting
+	// printf("----Field Splitting-----------------------------------------------------\n");
+	// ret = field_splitting(&list_save, "prout");
+	// printf("return = %i\n", ret);
+	// token_list = list_save;
+	// while (token_list)
+	// {
+	// 	printf("token = _%s_\n", (char *)token_list->content);
+	// 	token_list = token_list->next;
+	// }
 
 	// Read heredocs
 	printf("----Here docs-----------------------------------------------------\n");
@@ -117,26 +118,26 @@ int	main(int argc, char **argv, char **envp)
 		return (0);
 	}
 
-	// Wildcard
-	printf("----Wildcard expansion-----------------------------------------------------\n");
-	token_list = list_save;
-	ret = expand_wildcards(token_list, "prout");
-	printf("return = %i\n", ret);
-	while (token_list)
-	{
-		printf("token = %s\n", (char *)token_list->content);
-		token_list = token_list->next;
-	}
+	// // Wildcard
+	// printf("----Wildcard expansion-----------------------------------------------------\n");
+	// token_list = list_save;
+	// ret = expand_wildcards(token_list, "prout");
+	// printf("return = %i\n", ret);
+	// while (token_list)
+	// {
+	// 	printf("token = %s\n", (char *)token_list->content);
+	// 	token_list = token_list->next;
+	// }
 
-	// Quote removal
-	printf("----Quote removal-----------------------------------------------------\n");
-	token_list = list_save;
-	while (token_list)
-	{
-		ret = quote_removal(((char *)token_list->content), "prout");
-		printf("return = %i, token = %s\n", ret, (char *)token_list->content);
-		token_list = token_list->next;
-	}
+	// // Quote removal
+	// printf("----Quote removal-----------------------------------------------------\n");
+	// token_list = list_save;
+	// while (token_list)
+	// {
+	// 	ret = quote_removal(((char *)token_list->content), "prout");
+	// 	printf("return = %i, token = %s\n", ret, (char *)token_list->content);
+	// 	token_list = token_list->next;
+	// }
 
 
 	// Parse token list
@@ -147,24 +148,30 @@ int	main(int argc, char **argv, char **envp)
 	printf("return = %i, tree = %p\n", ret, tree);
 	print_tree(tree);
 
-	// Search path
-	printf("----Path-----------------------------------------------------\n");
-	char	*arr[] = {
-		"cat",
-		"ls",
-		"bidule",
-		"./bidule",
-		NULL
-	};
-	i = 0;
-	while (arr[i])
-	{
-		ret = search_path(arr[i], &value, table, "prout");
-		printf("return = %i, in = _%s_, out = _%s_\n", ret, arr[i], value);
-		if (arr[i] != value)
-			free(value);
-		i++;
-	}
+	// // Search path
+	// printf("----Path-----------------------------------------------------\n");
+	// char	*arr[] = {
+	// 	"cat",
+	// 	"ls",
+	// 	"bidule",
+	// 	"./bidule",
+	// 	NULL
+	// };
+	// i = 0;
+	// while (arr[i])
+	// {
+	// 	ret = search_path(arr[i], &value, table, "prout");
+	// 	printf("return = %i, in = _%s_, out = _%s_\n", ret, arr[i], value);
+	// 	if (arr[i] != value)
+	// 		free(value);
+	// 	i++;
+	// }
+
+	// Word expansion
+	printf("----Expansion-----------------------------------------------------\n");
+	ret = expand_node(tree, &info);
+	printf("return = %i, tree = %p\n", ret, tree);
+	print_tree(tree);
 	
 	free_tree(&tree);
 	free_hash_table(table);

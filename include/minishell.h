@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/18 14:50:20 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/18 16:13:18 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,8 @@ int				field_splitting(t_list **list, char *prog_name);
 int				expand_wildcards(t_list *list, char *prog_name);
 int				search_path(char *arg0, char **path,
 					t_hash_table *table, char *prog_name);
+int				expand_node(t_tree *node, t_general_info *info);
+int				free_perror_and_ret(void *to_free, char *prog_name,
+					int print_error, int ret);
 
 #endif

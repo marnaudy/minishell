@@ -6,7 +6,7 @@
 #    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/18 12:22:54 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/05/18 16:31:24 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,8 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/exec_command_node/write_file_error.c \
 			srcs/exec_command_node/redirect_input.c \
 			srcs/exec_command_node/redirect_output.c \
+			srcs/exec_command_node/ambiguous_redirect.c \
+			srcs/exec_command_node/expand_node.c \
 			tester.c
 
 HEADERS	=	include/lexer.h \
@@ -65,6 +67,9 @@ HEADERS	=	include/lexer.h \
 			include/quote_removal.h \
 			include/here_doc.h \
 			include/parser.h \
+			include/wildcard.h \
+			include/path_search.h \
+			include/exec_node.h \
 			include/minishell.h
 
 OBJS	=	${SRCS:.c=.o}

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_node.h                                        :+:      :+:    :+:   */
+/*   ambiguous_redirect.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/18 11:38:31 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/18 15:36:06 by marnaudy         ###   ########.fr       */
+/*   Created: 2022/05/18 14:24:30 by marnaudy          #+#    #+#             */
+/*   Updated: 2022/05/18 15:38:50 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_NODE_H
-# define EXEC_NODE_H
+#include "exec_node.h"
 
-# include "minishell.h"
-# include <fcntl.h>
+int	print_ambiguous_redirect(char *prog_name)
+{
+	char	*to_print;
 
-int	print_file_error(char *prog_name, char *file_name);
-int	redirect_input(t_tree *node, int is_child,
-		t_tree *root, t_general_info *info);
-int	redirect_output(t_tree *node, int is_child, char *prog_name);
-int	print_ambiguous_redirect(char *prog_name);
-
-#endif
+	to_print = ft_strcat(prog_name, ": ambiguous redirect\n");
+	if (!to_print)
+		return (-1);
+	write(STDERR_FILENO, to_print, ft_strlen(to_print));
+	free(to_print);
+	return (1);
+}
