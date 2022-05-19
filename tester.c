@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:31:52 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/19 12:14:23 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/19 16:46:10 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ int	main(int argc, char **argv, char **envp)
 	//Lexer and syntax test
 
 	// input = "echo ${\"pro\\\"ut\" && } $& $var<<eof \\\'prout&&pouet && blqblq&bla $b \"$b\" ${{\\}baobab} \'bl\\\' \'ou\'\"blou\" \"${va\"r}\" \"}}}\"}\" bouet&&( cat&&&) || in $var$var ${var}${var} $prout \'$var\' \"$var\" \"$?var\"$va?r $$var? $DISPLAY \'$\'var $$$var $\"${var}\" echo $var ${var} $? ${\"var\"} |  \'$var\' \"\\\\\\\" \\\' ${\\\" \\\\ \\} \'\\ \\a\' }\" p{var} * ************* *e* ../* machin*bidule */* \\*\"*\"\'*\'";
-	// input = "echo a < in >out>out2 && (echo b>>out << eof) | echo a | echo b <<out  || echo c< in < in2 | cat -e || (ls || ls) < in";
+	input = "echo a < in >out>out2 && (echo b>>out << eof) | echo a | echo b <<out  || echo c< in < in2 | cat -e || (ls || ls) < in";
 	// input = "(echo a && echo b) | cat";
-	input = "cat -e $var < in << eo\\f > out >>out2";
+	// input = "cat -e $var < in << eo\\f | (grep m && ls -a)>out";
+	// input = "(cat -e && ls -a)>out";
 	i = 0;
 	while (i < ft_strlen(input))
 	{
@@ -74,7 +75,7 @@ int	main(int argc, char **argv, char **envp)
 
 	// Parameter expansion
 	info = malloc(sizeof(t_general_info));
-	info->exit_code = 12;
+	info->exit_code = 0;
 	info->prog_name = ft_strdup("prout");
 	info->table = table;
 	// token_list = list_save;
@@ -168,11 +169,17 @@ int	main(int argc, char **argv, char **envp)
 	// 	i++;
 	// }
 
-	// Word execution
-	printf("----Word execution-----------------------------------------------------\n");
-	ret = expand_exec_command_node(tree, tree, info, 0);
-	printf("return = %i, exit_code = %i\n", ret, info->exit_code);
+	// // Word execution
+	// printf("----Word execution-----------------------------------------------------\n");
+	// ret = expand_exec_command_node(tree, tree, info, 0);
+	// printf("return = %i, exit_code = %i\n", ret, info->exit_code);
 	
+	// Minishell
+	printf("----Minishell-----------------------------------------------------\n");
+	info->root = tree;
+	ret = exec_node(tree, info, 0);
+	printf("return = %i, exit_code = %i\n", ret, info->exit_code);
+
 	free(info->prog_name);
 	free(info);
 	free_tree(&tree);

@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/19 12:37:42 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/19 16:26:21 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ typedef struct s_doc_list
 	int					is_quoted;
 	struct s_doc_list	*next;
 }	t_doc_list;
-
-typedef struct s_general_info
-{
-	char			*prog_name;
-	t_hash_table	*table;
-	int				exit_code;
-}	t_general_info;
 
 enum e_operator
 {
@@ -58,6 +51,14 @@ typedef struct s_tree
 	struct s_tree	*left;
 	struct s_tree	*right;
 }	t_tree;
+
+typedef struct s_general_info
+{
+	char			*prog_name;
+	t_hash_table	*table;
+	t_tree			*root;
+	int				exit_code;
+}	t_general_info;
 
 int				free_and_ret(char *s1, char *s2, int ret);
 int				is_escaped(char *str, int pos);
@@ -89,7 +90,6 @@ int				search_path(char *arg0, char **path,
 int				expand_node(t_tree *node, t_general_info *info);
 int				free_perror_and_ret(void *to_free, char *prog_name,
 					int print_error, int ret);
-int				expand_exec_command_node(t_tree *node, t_tree *root,
-					t_general_info *info, int is_child);
+int				exec_node(t_tree *node, t_general_info *info, int is_child);
 
 #endif

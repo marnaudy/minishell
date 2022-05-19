@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:40:53 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/19 12:03:48 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/19 16:38:54 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int	field_splitting(t_list **list, char *prog_name)
 			return (-1);
 		temp = temp->next;
 	}
-	remove_empty_tokens(list);
+	if (*list)
+		remove_empty_tokens(list);
 	return (0);
 }

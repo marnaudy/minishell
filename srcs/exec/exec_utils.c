@@ -6,17 +6,17 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:38:02 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/19 12:40:39 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/19 16:00:08 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec_node.h"
 
-int	exit_command_node(t_tree *root, t_general_info *info, int is_child, int ret)
+int	exit_command_node(t_general_info *info, int is_child, int ret)
 {
 	if (is_child)
 	{
-		free_tree(&root);
+		free_tree(&info->root);
 		free(info->prog_name);
 		free_hash_table(info->table);
 		free(info);
@@ -25,11 +25,11 @@ int	exit_command_node(t_tree *root, t_general_info *info, int is_child, int ret)
 	return (ret);
 }
 
-void	exit_wait_child(t_tree *root, t_general_info *info, int ret)
+void	exit_wait_child(t_general_info *info, int ret)
 {
 	close(STDIN_FILENO);
 	wait(NULL);
-	exit_command_node(root, info, 1, ret);
+	exit_command_node(info, 1, ret);
 }
 
 char	**list_to_tab(t_list *list, char *prog_name)

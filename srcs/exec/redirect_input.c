@@ -6,14 +6,13 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:37:54 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/19 12:01:16 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/19 16:02:58 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec_node.h"
 
-static int	write_here_doc(char *here_doc, t_tree *root,
-		t_general_info *info, int pipe_fd[2])
+static int	write_here_doc(char *here_doc, t_general_info *info, int pipe_fd[2])
 {
 	free(info->prog_name);
 	free_hash_table(info->table);
@@ -21,12 +20,11 @@ static int	write_here_doc(char *here_doc, t_tree *root,
 	close(pipe_fd[0]);
 	write(pipe_fd[1], here_doc, ft_strlen(here_doc));
 	close(pipe_fd[1]);
-	free_tree(&root);
+	free_tree(&info->root);
 	exit(0);
 }
 
-static int	launch_here_doc_writer(char *here_doc, t_tree *root,
-				t_general_info *info)
+static int	launch_here_doc_writer(char *here_doc, t_general_info *info)
 {
 	int	pipe_fd[2];
 	int	pid;
@@ -41,13 +39,12 @@ static int	launch_here_doc_writer(char *here_doc, t_tree *root,
 		return (-1);
 	}
 	if (pid == 0)
-		write_here_doc(here_doc, root, info, pipe_fd);
+		write_here_doc(here_doc, info, pipe_fd);
 	close(pipe_fd[1]);
 	return (pipe_fd[0]);
 }
 
-int	redirect_input(t_tree *node, int is_child,
-		t_tree *root, t_general_info *info)
+int	redirect_input(t_tree *node, int is_child, t_general_info *info)
 {
 	int	fd;
 
@@ -55,7 +52,7 @@ int	redirect_input(t_tree *node, int is_child,
 	if (node->infile)
 		fd = open(node->infile, O_RDONLY);
 	if (node->here_doc)
-		fd = launch_here_doc_writer(node->here_doc->content, root, info);
+		fd = launch_here_doc_writer(node->here_doc->content, info);
 	if (fd < 0)
 		return (print_file_error(info->prog_name, node->infile));
 	if (is_child && (node->infile || node->here_doc))

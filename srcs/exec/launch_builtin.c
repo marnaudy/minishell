@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 18:00:24 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/19 11:45:40 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/19 16:54:04 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	is_builtin(t_tree *node)
 {
 	if (!node->arg)
 		return (0);
-	return (!ft_strcmp((char *)node->arg->content, "echo")
+	return (!ft_strcmp((char *)node->arg->content, "echo ")
 		|| !ft_strcmp((char *)node->arg->content, "cd")
 		|| !ft_strcmp((char *)node->arg->content, "pwd")
 		|| !ft_strcmp((char *)node->arg->content, "export")

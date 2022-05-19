@@ -6,7 +6,7 @@
 #    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/19 12:44:48 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/05/19 18:25:58 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,14 +53,19 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/path_search/split_path.c \
 			srcs/path_search/path_search_utils.c \
 			srcs/path_search/path_search.c \
-			srcs/exec_command_node/write_file_error.c \
-			srcs/exec_command_node/redirect_input.c \
-			srcs/exec_command_node/redirect_output.c \
-			srcs/exec_command_node/ambiguous_redirect.c \
-			srcs/exec_command_node/expand_node.c \
-			srcs/exec_command_node/exec_command_node.c \
-			srcs/exec_command_node/launch_builtin.c \
-			srcs/exec_command_node/exec_utils.c \
+			srcs/exec/write_file_error.c \
+			srcs/exec/redirect_input.c \
+			srcs/exec/redirect_output.c \
+			srcs/exec/ambiguous_redirect.c \
+			srcs/exec/expand_node.c \
+			srcs/exec/exec_command_node.c \
+			srcs/exec/launch_builtin.c \
+			srcs/exec/exec_utils.c \
+			srcs/exec/exec_andor.c \
+			srcs/exec/exec_subshell.c \
+			srcs/exec/pipes.c \
+			srcs/exec/exec_pipe.c \
+			srcs/exec/exec_node.c \
 			tester.c
 
 HEADERS	=	include/lexer.h \
