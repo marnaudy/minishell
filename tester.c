@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:31:52 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/18 16:26:19 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/19 12:14:23 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **envp)
 	int				syntax_ret;
 	t_hash_table	*table;
 	char			*value;
-	t_general_info	info;
+	t_general_info	*info;
 	unsigned int	i;
 	t_doc_list		*doc_list;
 	t_doc_list		*doc_list_save;
@@ -33,7 +33,7 @@ int	main(int argc, char **argv, char **envp)
 	// input = "echo ${\"pro\\\"ut\" && } $& $var<<eof \\\'prout&&pouet && blqblq&bla $b \"$b\" ${{\\}baobab} \'bl\\\' \'ou\'\"blou\" \"${va\"r}\" \"}}}\"}\" bouet&&( cat&&&) || in $var$var ${var}${var} $prout \'$var\' \"$var\" \"$?var\"$va?r $$var? $DISPLAY \'$\'var $$$var $\"${var}\" echo $var ${var} $? ${\"var\"} |  \'$var\' \"\\\\\\\" \\\' ${\\\" \\\\ \\} \'\\ \\a\' }\" p{var} * ************* *e* ../* machin*bidule */* \\*\"*\"\'*\'";
 	// input = "echo a < in >out>out2 && (echo b>>out << eof) | echo a | echo b <<out  || echo c< in < in2 | cat -e || (ls || ls) < in";
 	// input = "(echo a && echo b) | cat";
-	input = "cat -e $var \"$var\" < in << eo\\f > out >>out2";
+	input = "cat -e $var < in << eo\\f > out >>out2";
 	i = 0;
 	while (i < ft_strlen(input))
 	{
@@ -73,9 +73,10 @@ int	main(int argc, char **argv, char **envp)
 	}
 
 	// Parameter expansion
-	info.exit_code = 12;
-	info.prog_name = "prout";
-	info.table = table;
+	info = malloc(sizeof(t_general_info));
+	info->exit_code = 12;
+	info->prog_name = ft_strdup("prout");
+	info->table = table;
 	// token_list = list_save;
 	// while (token_list)
 	// {
@@ -167,12 +168,13 @@ int	main(int argc, char **argv, char **envp)
 	// 	i++;
 	// }
 
-	// Word expansion
-	printf("----Expansion-----------------------------------------------------\n");
-	ret = expand_node(tree, &info);
-	printf("return = %i, tree = %p\n", ret, tree);
-	print_tree(tree);
+	// Word execution
+	printf("----Word execution-----------------------------------------------------\n");
+	ret = expand_exec_command_node(tree, tree, info, 0);
+	printf("return = %i, exit_code = %i\n", ret, info->exit_code);
 	
+	free(info->prog_name);
+	free(info);
 	free_tree(&tree);
 	free_hash_table(table);
 }

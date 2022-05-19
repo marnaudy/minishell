@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:51:15 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/12 15:38:24 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/19 12:11:14 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static int	print_delimiter_error(char *delimiter, char *prog_name)
 		return (-1);
 	write(STDERR_FILENO, to_print, ft_strlen(to_print));
 	free(to_print);
-	free(delimiter);
 	return (0);
 }
 

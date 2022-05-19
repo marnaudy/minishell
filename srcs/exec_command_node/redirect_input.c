@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:37:54 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/18 12:23:58 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/19 12:01:16 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ int	redirect_input(t_tree *node, int is_child,
 		return (print_file_error(info->prog_name, node->infile));
 	if (is_child && (node->infile || node->here_doc))
 	{
-		if (dup2(fd, STDIN_FILENO))
+		if (dup2(fd, STDIN_FILENO) < 0)
 		{
 			perror(info->prog_name);
 			close(fd);
-			return (-1);
+			return (-2);
 		}
 		close(fd);
 		return (STDIN_FILENO);

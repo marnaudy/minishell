@@ -6,7 +6,7 @@
 #    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/18 16:31:24 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/05/19 12:44:48 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,9 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/exec_command_node/redirect_output.c \
 			srcs/exec_command_node/ambiguous_redirect.c \
 			srcs/exec_command_node/expand_node.c \
+			srcs/exec_command_node/exec_command_node.c \
+			srcs/exec_command_node/launch_builtin.c \
+			srcs/exec_command_node/exec_utils.c \
 			tester.c
 
 HEADERS	=	include/lexer.h \

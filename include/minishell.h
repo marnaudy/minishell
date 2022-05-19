@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/18 16:13:18 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/19 12:37:42 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,7 @@ int				search_path(char *arg0, char **path,
 int				expand_node(t_tree *node, t_general_info *info);
 int				free_perror_and_ret(void *to_free, char *prog_name,
 					int print_error, int ret);
+int				expand_exec_command_node(t_tree *node, t_tree *root,
+					t_general_info *info, int is_child);
 
 #endif

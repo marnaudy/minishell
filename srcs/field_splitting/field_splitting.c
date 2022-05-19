@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:40:53 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/18 14:55:23 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/19 12:03:48 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static void	remove_empty_tokens(t_list **list)
 		free(to_free);
 	}
 	temp = *list;
-	while (temp->next)
+	while (temp && temp->next)
 	{
 		str = (char *)temp->next->content;
 		if (!str[0])

@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 15:20:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/16 17:04:26 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/19 12:48:57 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	**split_path(char const *s, char *prog_name)
 		if (!array[arr_idx - 1])
 			perror(prog_name);
 		i += j;
-		s[i] && !(s[i] == ':' && !s[i + 1] && j) && i++;
+		i += (s[i] && !(s[i] == ':' && !s[i + 1] && j));
 	}
 	array[arr_idx] = NULL;
 	return (check_array(array, nb_string(s)));
