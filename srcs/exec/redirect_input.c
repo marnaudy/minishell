@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:37:54 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/19 16:02:58 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/20 12:46:22 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static int	write_here_doc(char *here_doc, t_general_info *info, int pipe_fd[2])
 {
 	free(info->prog_name);
 	free_hash_table(info->table);
-	free(info);
 	close(pipe_fd[0]);
 	write(pipe_fd[1], here_doc, ft_strlen(here_doc));
 	close(pipe_fd[1]);
 	free_tree(&info->root);
+	free(info);
 	exit(0);
 }
 
