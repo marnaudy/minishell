@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 12:44:10 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/18 16:24:54 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/20 14:26:49 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int	expand_node(t_tree *node, t_general_info *info)
 	if (expand_parameters_node(node, info))
 		return (-1);
 	if (field_splitting(&node->arg, info->prog_name))
+		return (-1);
+	if (expand_wildcards(node->arg, info->prog_name))
 		return (-1);
 	ret = split_and_wildcard_str(node->infile, info->prog_name);
 	if (ret == 1)

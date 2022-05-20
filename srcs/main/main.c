@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:19:56 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/20 12:39:09 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/20 15:33:28 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_list	*get_token_list(t_general_info *info)
 	int		ret;
 	t_list	*token_list;
 
-	input = get_input();
+	input = get_input(info->prog_name);
 	if (!input)
 		exit_minishell(info);
 	ret = lexer(&token_list, input, info->prog_name);
