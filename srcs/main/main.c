@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:19:56 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/20 12:30:38 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/20 12:39:09 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	parse_and_exec(t_list *token_list, t_doc_list *here_doc_list,
 		info->exit_code = 1;
 		exit_minishell(info);
 	}
+	free_tree(&info->root);
 }
 
 int	main(int argc, char **argv, char **envp)

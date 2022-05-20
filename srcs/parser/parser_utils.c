@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 11:33:31 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/20 12:25:59 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/20 12:41:45 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,5 @@ void	free_tree(t_tree **tree)
 	free((*tree)->infile);
 	free((*tree)->outfile);
 	free(*tree);
-	tree = NULL;
+	*tree = NULL;
 }

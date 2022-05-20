@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:43:58 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/19 15:59:08 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/20 12:35:04 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*prepare_exec(t_tree *node, t_general_info *info, char ***argv)
 			&path, info->table, info->prog_name);
 	if (ret)
 	{
-		free(argv);
+		free(*argv);
 		exit_wait_child(info, ret);
 	}
 	return (path);
