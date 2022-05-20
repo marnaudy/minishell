@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/19 16:26:21 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/20 12:31:23 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "environment.h"
 # include <stdio.h>
 # include <unistd.h>
+# include <readline/readline.h>
 
 typedef struct s_doc_list
 {
@@ -91,5 +92,8 @@ int				expand_node(t_tree *node, t_general_info *info);
 int				free_perror_and_ret(void *to_free, char *prog_name,
 					int print_error, int ret);
 int				exec_node(t_tree *node, t_general_info *info, int is_child);
+char			*get_input(void);
+t_general_info	*free_general_info(t_general_info *info);
+t_general_info	*init_info(char *arg0, char **envp);
 
 #endif
