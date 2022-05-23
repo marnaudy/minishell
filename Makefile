@@ -6,7 +6,7 @@
 #    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/23 16:04:24 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/05/23 16:57:49 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,7 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/exec/exec_pipe.c \
 			srcs/exec/exec_node.c \
 			srcs/echo/echo.c \
+			srcs/unset/unset.c \
 			srcs/main/get_input.c \
 			srcs/main/info_utils.c \
 			srcs/main/main.c

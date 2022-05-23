@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:25:32 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/20 18:01:52 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 16:50:00 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,34 +27,11 @@ int	is_option_n(char *str)
 	return (1);
 }
 
-static int	open_files_echo(int *fd_out,
-				t_general_info *info, t_tree *node)
+int	echo(t_tree *node, int fd_out)
 {
-	int	fd_in;
-
-	fd_in = redirect_input(node, 0, info);
-	if (fd_in < 0)
-		return (-1);
-	*fd_out = redirect_output(node, 0, info->prog_name);
-	if (*fd_out < 0)
-	{
-		if (fd_in != STDIN_FILENO)
-			close(fd_in);
-		return (-1);
-	}
-	if (fd_in != STDIN_FILENO)
-		close(fd_in);
-	return (0);
-}
-
-int	echo(t_tree *node, t_general_info *info)
-{
-	int		fd_out;
 	int		option;
 	t_list	*list;
 
-	if (open_files_echo(&fd_out, info, node))
-		return (-1);
 	list = node->arg->next;
 	option = 0;
 	while (list && ((char *)list->content)[0] == '-'

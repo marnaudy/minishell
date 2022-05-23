@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:38:31 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 16:03:54 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 16:55:03 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@ int		*open_pipes(int nb_pipes, char *prog_name);
 int		exec_pipe(t_tree *node, t_general_info *info);
 int		expand_exec_command_node(t_tree *node, t_general_info *info,
 			int is_child);
-int		echo(t_tree *node, t_general_info *info);
+int		echo(t_tree *node, int fd_out);
+int		unset(t_tree *node, t_general_info *info, int fd_out);
+
 #endif
