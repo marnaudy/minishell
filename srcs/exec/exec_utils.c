@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:38:02 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 12:48:34 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 16:09:34 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	exit_command_node(t_general_info *info, int is_child, int ret)
 		free(info);
 		exit(ret);
 	}
+	info->exit_code = ret;
 	return (ret);
 }
 
