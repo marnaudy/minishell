@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:38:31 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 16:55:03 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 17:28:28 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ int		expand_exec_command_node(t_tree *node, t_general_info *info,
 			int is_child);
 int		echo(t_tree *node, int fd_out);
 int		unset(t_tree *node, t_general_info *info, int fd_out);
+int		env(t_general_info *info, int fd_out);
 
 #endif

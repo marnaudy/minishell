@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 18:00:24 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 16:55:37 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 17:28:49 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	launch_builtin(t_tree *node, t_general_info *info)
 		return (echo(node, fd_out));
 	if (!ft_strcmp((char *)node->arg->content, "unset"))
 		return (unset(node, info, fd_out));
+	if (!ft_strcmp((char *)node->arg->content, "env"))
+		return (env(info, fd_out));
 	puts("Nothing to see here\n");
 	return (0);
 }
