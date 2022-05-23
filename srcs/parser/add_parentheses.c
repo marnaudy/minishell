@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:41:41 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/12 15:08:10 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 14:26:02 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	add_parentheses(t_tree **root, t_list **token_list, t_doc_list **doc_list,
 	op_type = operator_type((char *)(*token_list)->content);
 	while ((*token_list) && op_type <= here_doc)
 	{
-		add_redirection(new_node, token_list, doc_list);
+		add_redirection(new_node, token_list, doc_list, prog_name);
 		if (*token_list)
 			op_type = operator_type((char *)(*token_list)->content);
 	}

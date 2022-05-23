@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 12:46:44 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 14:30:02 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ typedef struct s_doc_list
 	int					is_quoted;
 	struct s_doc_list	*next;
 }	t_doc_list;
+
+typedef struct s_file_list
+{
+	char				*name;
+	int					append;
+	struct s_file_list	*next;
+}	t_file_list;
 
 typedef struct s_env_list
 {
@@ -52,9 +59,8 @@ typedef struct s_tree
 {
 	enum e_operator	type;
 	t_list			*arg;
-	char			*infile;
-	char			*outfile;
-	short int		append_output;
+	t_list			*infile;
+	t_file_list		*outfile;
 	t_doc_list		*here_doc;
 	struct s_tree	**pipe_children;
 	struct s_tree	*left;

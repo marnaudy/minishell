@@ -6,7 +6,7 @@
 #    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/23 12:36:55 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/05/23 16:04:24 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,6 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/parser/add_operator.c \
 			srcs/parser/add_parentheses.c \
 			srcs/parser/parser.c \
-			srcs/parser/tree_printer.c \
 			srcs/field_splitting/field_splitting.c \
 			srcs/wildcard/get_base_path.c \
 			srcs/wildcard/has_wildcard.c \
@@ -58,6 +57,7 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/exec/redirect_input.c \
 			srcs/exec/redirect_output.c \
 			srcs/exec/ambiguous_redirect.c \
+			srcs/exec/expand_filenames.c \
 			srcs/exec/expand_node.c \
 			srcs/exec/exec_command_node.c \
 			srcs/exec/launch_builtin.c \

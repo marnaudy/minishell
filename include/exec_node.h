@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:38:31 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/20 17:04:16 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 16:03:54 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 int		print_file_error(char *prog_name, char *file_name);
 int		redirect_input(t_tree *node, int is_child, t_general_info *info);
 int		redirect_output(t_tree *node, int is_child, char *prog_name);
+int		split_and_wildcard_file(t_tree *node, char *prog_name);
 int		print_ambiguous_redirect(char *prog_name);
 int		is_builtin(t_tree *node);
 int		launch_builtin(t_tree *node, t_general_info *info);

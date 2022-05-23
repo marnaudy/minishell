@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:19:56 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/20 15:33:28 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 15:46:54 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	parse_and_exec(t_list *token_list, t_doc_list *here_doc_list,
 		info->exit_code = 1;
 		exit_minishell(info);
 	}
-	if (exec_node(info->root, info, 0))
+	if (exec_node(info->root, info, 0) < 0)
 	{
 		info->exit_code = 1;
 		exit_minishell(info);
