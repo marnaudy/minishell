@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:26:38 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/05 15:31:05 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 12:14:27 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,18 @@ static int	split_equal(char **key, char **value, char *input)
 	return (0);
 }
 
-static int	parse_env(char *env, t_hash_table *table)
+static int	parse_env(char *env, t_general_info *info)
 {
 	char	*key;
 	char	*value;
 	int		ret;
 
 	ret = split_equal(&key, &value, env);
+	if (ret == -1)
+		perror(info->prog_name);
 	if (ret)
 		return (ret);
-	if (add_to_table(table, key, value))
+	if (add_to_env(info, key, value, 1))
 	{
 		free(key);
 		free(value);
@@ -77,23 +79,20 @@ static int	parse_env(char *env, t_hash_table *table)
 	return (0);
 }
 
-t_hash_table	*init_env_table(char **envp)
+int	init_env_list(char **envp, t_general_info *info)
 {
-	t_hash_table	*new_table;
-	int				i;
+	int			i;
 
-	new_table = ft_calloc(sizeof(t_hash_table), 1);
-	if (!new_table)
-		return (NULL);
+	info->env = NULL;
 	i = 0;
 	while (envp[i])
 	{
-		if (parse_env(envp[i], new_table) < 0)
+		if (parse_env(envp[i], info) < 0)
 		{
-			free_hash_table(new_table);
-			return (NULL);
+			free_env_list(&info->env);
+			return (-1);
 		}
 		i++;
 	}
-	return (new_table);
+	return (0);
 }

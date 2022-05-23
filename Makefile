@@ -6,7 +6,7 @@
 #    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/20 17:42:51 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/05/23 12:36:55 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/environment/environment.c \
 			srcs/environment/free_environment.c \
 			srcs/environment/init_environment.c \
+			srcs/environment/export_environment.c \
 			srcs/parameter_expansion/replace_in_str.c \
 			srcs/parameter_expansion/parameter_len.c \
 			srcs/parameter_expansion/bad_substitution.c \

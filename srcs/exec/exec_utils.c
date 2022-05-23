@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:38:02 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/19 16:00:08 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 12:48:34 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	exit_command_node(t_general_info *info, int is_child, int ret)
 	{
 		free_tree(&info->root);
 		free(info->prog_name);
-		free_hash_table(info->table);
+		free_env_list(&info->env);
 		free(info);
 		exit(ret);
 	}

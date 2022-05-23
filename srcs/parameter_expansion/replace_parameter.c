@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 11:48:00 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/12 15:36:54 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 12:42:14 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	replace_parameter_exit_code(char **str, int exit_code,
 }
 
 static int	replace_parameter_no_brace(char **str, int *idx,
-		t_hash_table *table, int param_len)
+		t_env_list *env_list, int param_len)
 {
 	char	*new_str;
 	char	*parameter;
@@ -49,7 +49,7 @@ static int	replace_parameter_no_brace(char **str, int *idx,
 	parameter = ft_substr(*str, (*idx) + 1, param_len - 1);
 	if (!parameter)
 		return (-1);
-	value = fetch_value(table, parameter);
+	value = fetch_value(env_list, parameter);
 	new_str = replace_in_str(*str, *idx, param_len, value);
 	if (!new_str)
 		return (free_and_ret(parameter, NULL, -1));
@@ -61,7 +61,7 @@ static int	replace_parameter_no_brace(char **str, int *idx,
 }
 
 static int	replace_parameter_brace(char **str, int *idx,
-		t_hash_table *table, char *prog_name)
+		t_env_list *env_list, char *prog_name)
 {
 	char	*new_str;
 	char	*parameter;
@@ -77,7 +77,7 @@ static int	replace_parameter_brace(char **str, int *idx,
 	if (!is_valid_parameter(parameter, -1))
 		return (free_and_ret(parameter, NULL,
 				bad_sub_message(parameter, prog_name, 1)));
-	value = fetch_value(table, parameter);
+	value = fetch_value(env_list, parameter);
 	new_str = replace_in_str(*str, *idx, param_len, value);
 	if (!new_str)
 		return (free_and_ret(parameter, NULL, -1));
@@ -101,6 +101,6 @@ int	replace_parameter(char **str, int *idx, t_general_info *info)
 		return (
 			replace_parameter_exit_code(str, info->exit_code, idx, param_len));
 	if ((*str)[(*idx) + 1] != '{')
-		return (replace_parameter_no_brace(str, idx, info->table, param_len));
-	return (replace_parameter_brace(str, idx, info->table, info->prog_name));
+		return (replace_parameter_no_brace(str, idx, info->env, param_len));
+	return (replace_parameter_brace(str, idx, info->env, info->prog_name));
 }

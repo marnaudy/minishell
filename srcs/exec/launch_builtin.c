@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 18:00:24 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/20 17:17:49 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 12:55:26 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_builtin(t_tree *node)
 		|| !ft_strcmp((char *)node->arg->content, "pwd")
 		|| !ft_strcmp((char *)node->arg->content, "export")
 		|| !ft_strcmp((char *)node->arg->content, "unset")
-		|| !ft_strcmp((char *)node->arg->content, "env")
+		|| !ft_strcmp((char *)node->arg->content, "env ")
 		|| !ft_strcmp((char *)node->arg->content, "exit"));
 }
 

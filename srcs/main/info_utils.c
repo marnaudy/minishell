@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 12:28:25 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/20 12:28:32 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 12:39:11 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_general_info	*free_general_info(t_general_info *info)
 {
 	if (info)
 	{
-		free_hash_table(info->table);
+		free_env_list(&info->env);
 		free(info->prog_name);
 		free_tree(&info->root);
 		free(info);
@@ -35,8 +35,7 @@ t_general_info	*init_info(char *arg0, char **envp)
 		perror(arg0);
 		return (NULL);
 	}
-	info->table = init_env_table(envp);
-	if (!info->table)
+	if (init_env_list(envp, info))
 		return (free_general_info(info));
 	i = ft_strlen(arg0) - 1;
 	while (arg0[i] != '/' && i)

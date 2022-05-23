@@ -6,34 +6,32 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:28:03 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/04 17:01:39 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 11:40:08 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environment.h"
 
-void	free_key_value_pair(t_key_val_pair *data)
+void	free_env_pair(t_env_list *to_free)
 {
-	free(data->key);
-	free(data->value);
-	data->key = NULL;
+	free(to_free->key);
+	free(to_free->value);
+	free(to_free);
 }
 
-void	free_hash_table(t_hash_table *table)
+void	free_env_list(t_env_list **list)
 {
-	t_hash_table	*to_free;
-	int				i;
+	t_env_list	*to_free;
+	t_env_list	*iter;
 
-	while (table)
+	iter = *list;
+	while (iter)
 	{
-		to_free = table;
-		table = table->next;
-		i = 0;
-		while (i < HASH_TABLE_SIZE)
-		{
-			free_key_value_pair(&to_free->data[i]);
-			i++;
-		}
+		to_free = iter;
+		iter = iter->next;
+		free(to_free->key);
+		free(to_free->value);
 		free(to_free);
 	}
+	*list = NULL;
 }

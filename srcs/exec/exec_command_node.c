@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:43:58 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/20 12:35:04 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 12:54:34 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*prepare_exec(t_tree *node, t_general_info *info, char ***argv)
 	if (*argv == NULL)
 		exit_wait_child(info, -1);
 	ret = search_path((char *) node->arg->content,
-			&path, info->table, info->prog_name);
+			&path, info->env, info->prog_name);
 	if (ret)
 	{
 		free(*argv);
@@ -41,14 +41,18 @@ static char	*prepare_exec(t_tree *node, t_general_info *info, char ***argv)
 void	exec_command_node(t_tree *node, t_general_info *info)
 {
 	char	**argv;
+	char	**envp;
 	char	*path;
 
 	path = prepare_exec(node, info, &argv);
-	execv(path, argv);
+	if (export_env(info, &envp))
+		exit_command_node(info, 1, -1);
+	execve(path, argv, envp);
 	perror(info->prog_name);
 	if (path != argv[0])
 		free(path);
 	free(argv);
+	free_char_array_and_ret(envp, 0);
 	exit_wait_child(info, -1);
 }
 

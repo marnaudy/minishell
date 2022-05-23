@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 14:09:20 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/16 17:09:58 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 12:40:27 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	free_char_array(char **arr)
 	}
 }
 
-int	search_path(char *arg0, char **path, t_hash_table *table, char *prog_name)
+int	search_path(char *arg0, char **path, t_env_list *env_list, char *prog_name)
 {
 	char	*path_value;
 	char	**path_arr;
@@ -37,7 +37,7 @@ int	search_path(char *arg0, char **path, t_hash_table *table, char *prog_name)
 	*path = arg0;
 	if (ft_is_in_charset('/', arg0))
 		return (no_path_search(arg0, path, prog_name));
-	path_value = fetch_value(table, "PATH");
+	path_value = fetch_value(env_list, "PATH");
 	if (!path_value)
 		return (no_path_search(arg0, path, prog_name));
 	path_arr = split_path(path_value, prog_name);

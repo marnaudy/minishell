@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/20 15:33:13 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/23 12:46:44 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
-# include "environment.h"
 # include <stdio.h>
+# include <stdlib.h>
 # include <unistd.h>
 # include <readline/readline.h>
 
@@ -25,6 +25,14 @@ typedef struct s_doc_list
 	int					is_quoted;
 	struct s_doc_list	*next;
 }	t_doc_list;
+
+typedef struct s_env_list
+{
+	char				*key;
+	char				*value;
+	int					export;
+	struct s_env_list	*next;
+}	t_env_list;
 
 enum e_operator
 {
@@ -56,7 +64,7 @@ typedef struct s_tree
 typedef struct s_general_info
 {
 	char			*prog_name;
-	t_hash_table	*table;
+	t_env_list		*env;
 	t_tree			*root;
 	int				exit_code;
 }	t_general_info;
@@ -65,11 +73,14 @@ int				free_and_ret(char *s1, char *s2, int ret);
 int				is_escaped(char *str, int pos);
 int				lexer(t_list **list, char *input, char *prog_name);
 int				check_syntax(t_list *token_list, char *prog_name);
-t_hash_table	*init_env_table(char **envp);
-void			free_hash_table(t_hash_table *table);
-int				add_to_table(t_hash_table *table, char *key, char *value);
-char			*fetch_value(t_hash_table *table, char *key);
-int				remove_value(t_hash_table *table, char *key);
+int				init_env_list(char **envp, t_general_info *info);
+void			free_env_list(t_env_list **list);
+int				add_to_env(t_general_info *info, char *key,
+					char *value, int export);
+char			*fetch_value(t_env_list *list, char *key);
+int				remove_value(t_env_list **list, char *key);
+int				export_env(t_general_info *info, char ***env_arr);
+int				free_char_array_and_ret(char **arr, int ret);
 int				is_valid_parameter(char *parameter, int len);
 int				skip_simple_quote(char *input, int idx, int *token_len);
 int				skip_quote(char *input, int idx, int *token_len);
@@ -87,7 +98,7 @@ void			print_tree(t_tree *tree);
 int				field_splitting(t_list **list, char *prog_name);
 int				expand_wildcards(t_list *list, char *prog_name);
 int				search_path(char *arg0, char **path,
-					t_hash_table *table, char *prog_name);
+					t_env_list *env_list, char *prog_name);
 int				expand_node(t_tree *node, t_general_info *info);
 int				free_perror_and_ret(void *to_free, char *prog_name,
 					int print_error, int ret);
