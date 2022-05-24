@@ -6,7 +6,7 @@
 /*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 12:30:46 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/24 11:20:50 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/24 11:30:03 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	*get_input(char *prog_name)
 		free(input);
 		return (NULL);
 	}
-	if (!is_empty(input))
+	if (input && !is_empty(input))
 		add_history(input);
 	return (input);
 }

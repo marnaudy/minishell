@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_here_doc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:51:15 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/19 12:11:14 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/24 11:27:33 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,14 @@ int	read_all_here_docs(t_list *token_list, char *prog_name,
 	int nb_token, t_doc_list **doc_list)
 {
 	t_doc_list	*doc;
+	int			fd_save;
 
+	if (!isatty(STDIN_FILENO))
+	{
+		fd_save = disable_stdout(prog_name);
+		if (fd_save == -1)
+			return (-1);
+	}
 	*doc_list = NULL;
 	if (get_delimiters(token_list, prog_name, nb_token, doc_list))
 		return (-1);
@@ -104,6 +111,11 @@ int	read_all_here_docs(t_list *token_list, char *prog_name,
 		if (read_here_doc(doc, prog_name))
 			return (-1);
 		doc = doc->next;
+	}
+	if (!isatty(STDIN_FILENO))
+	{
+		if (restore_stdout(fd_save, prog_name))
+			return (-1);
 	}
 	return (0);
 }
