@@ -6,7 +6,7 @@
 /*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/24 15:35:12 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/24 16:58:52 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_general_info
 	char			*cwd;
 }	t_general_info;
 
+int				is_blank(char c);
 int				free_and_ret(char *s1, char *s2, int ret);
 int				is_escaped(char *str, int pos);
 int				lexer(t_list **list, char *input, char *prog_name);

@@ -6,7 +6,7 @@
 /*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:38:02 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/24 15:38:03 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/24 16:32:57 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	exit_command_node(t_general_info *info, int is_child, int ret)
 	if (is_child)
 	{
 		free_general_info(info);
+		rl_clear_history();
 		exit(ret);
 	}
 	info->exit_code = ret;

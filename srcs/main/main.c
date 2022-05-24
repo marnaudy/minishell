@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:19:56 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 15:46:54 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/24 16:36:35 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	exit_minishell(t_general_info *info)
 
 	ret = info->exit_code;
 	free_general_info(info);
+	rl_clear_history();
 	exit(ret);
 }
 

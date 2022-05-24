@@ -6,7 +6,7 @@
 /*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:37:54 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/24 15:37:33 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/24 16:34:02 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	write_here_doc(char *here_doc, t_general_info *info, int pipe_fd[2])
 {
 	close(pipe_fd[0]);
+	rl_clear_history();
 	write(pipe_fd[1], here_doc, ft_strlen(here_doc));
 	close(pipe_fd[1]);
 	free_general_info(info);
