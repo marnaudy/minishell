@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 12:30:46 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/20 15:36:59 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/24 11:20:50 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,20 @@ int	restore_stdout(int fd_save, char *prog_name)
 	return (0);
 }
 
+int	is_empty(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_is_in_charset(str[i], " \t\n\f\r\v"))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 char	*get_input(char *prog_name)
 {
 	char	*prompt;
@@ -74,5 +88,7 @@ char	*get_input(char *prog_name)
 		free(input);
 		return (NULL);
 	}
+	if (!is_empty(input))
+		add_history(input);
 	return (input);
 }
