@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_node.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:38:31 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 17:28:28 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/24 12:33:02 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ int		expand_exec_command_node(t_tree *node, t_general_info *info,
 int		echo(t_tree *node, int fd_out);
 int		unset(t_tree *node, t_general_info *info, int fd_out);
 int		env(t_general_info *info, int fd_out);
+int		display_export_env(t_general_info *info, int fd_out);
+int		export(t_tree *node, int fd_out, t_general_info *info);
 
 #endif

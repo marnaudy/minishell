@@ -3,19 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:30:49 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 13:58:18 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:59:59 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environment.h"
 
+void	add_pair_back(t_env_list **list, t_env_list *new)
+{
+	t_env_list	*tmp;
+
+	if (!*list)
+	{
+		*list = new;
+		return ;
+	}
+	tmp = *list;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+}
+
+void	add_pair_to_list(t_env_list **list, t_env_list *new)
+{
+	t_env_list	*iter;
+
+	iter = *list;
+	while (iter)
+	{
+		if (!ft_strcmp(iter->key, new->key))
+		{
+			free(iter->value);
+			iter->value = new->value;
+			free(new->key);
+			free(new);
+			return ;
+		}
+		iter = iter->next;
+	}
+	add_pair_back(list, new);
+}
+
 int	add_to_env(t_general_info *info, char *key, char *value, int export)
 {
 	t_env_list	*new_pair;
-	t_env_list	*iter;
 
 	new_pair = malloc(sizeof(t_env_list));
 	if (!new_pair)
@@ -27,15 +61,7 @@ int	add_to_env(t_general_info *info, char *key, char *value, int export)
 	new_pair->value = value;
 	new_pair->export = export;
 	new_pair->next = NULL;
-	if (info->env == NULL)
-	{
-		info->env = new_pair;
-		return (0);
-	}
-	iter = info->env;
-	while (iter->next)
-		iter = iter->next;
-	iter->next = new_pair;
+	add_pair_to_list(&info->env, new_pair);
 	return (0);
 }
 

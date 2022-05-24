@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 18:00:24 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 17:28:49 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:37:53 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	launch_builtin(t_tree *node, t_general_info *info)
 		return (unset(node, info, fd_out));
 	if (!ft_strcmp((char *)node->arg->content, "env"))
 		return (env(info, fd_out));
+	if (!ft_strcmp((char *)node->arg->content, "export"))
+		return (export(node, fd_out, info));
 	puts("Nothing to see here\n");
 	return (0);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
+#    By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/23 17:28:05 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/05/24 14:38:20 by cboudrin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,8 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/echo/echo.c \
 			srcs/unset/unset.c \
 			srcs/env/env.c \
+			srcs/export/export_display.c \
+			srcs/export/export.c \
 			srcs/main/get_input.c \
 			srcs/main/info_utils.c \
 			srcs/main/main.c
