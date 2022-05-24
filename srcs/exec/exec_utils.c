@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:38:02 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 16:09:34 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/24 15:38:03 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@ int	exit_command_node(t_general_info *info, int is_child, int ret)
 {
 	if (is_child)
 	{
-		free_tree(&info->root);
-		free(info->prog_name);
-		free_env_list(&info->env);
-		free(info);
+		free_general_info(info);
 		exit(ret);
 	}
 	info->exit_code = ret;

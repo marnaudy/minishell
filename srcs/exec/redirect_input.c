@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:37:54 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 15:52:55 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/24 15:37:33 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 static int	write_here_doc(char *here_doc, t_general_info *info, int pipe_fd[2])
 {
-	free(info->prog_name);
-	free_env_list(&info->env);
 	close(pipe_fd[0]);
 	write(pipe_fd[1], here_doc, ft_strlen(here_doc));
 	close(pipe_fd[1]);
-	free_tree(&info->root);
-	free(info);
+	free_general_info(info);
 	exit(0);
 }
 

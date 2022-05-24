@@ -6,7 +6,7 @@
 /*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/24 11:25:14 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/24 15:35:12 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_general_info
 	t_env_list		*env;
 	t_tree			*root;
 	int				exit_code;
+	char			*cwd;
 }	t_general_info;
 
 int				free_and_ret(char *s1, char *s2, int ret);

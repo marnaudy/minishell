@@ -6,7 +6,7 @@
 /*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 18:00:24 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/24 14:37:53 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/24 15:19:27 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	launch_builtin(t_tree *node, t_general_info *info)
 		return (env(info, fd_out));
 	if (!ft_strcmp((char *)node->arg->content, "export"))
 		return (export(node, fd_out, info));
+	if (!ft_strcmp((char *)node->arg->content, "pwd"))
+		return (pwd(fd_out, info));
 	puts("Nothing to see here\n");
 	return (0);
 }

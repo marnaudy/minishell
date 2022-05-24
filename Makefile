@@ -6,7 +6,7 @@
 #    By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/24 14:38:20 by cboudrin         ###   ########.fr        #
+#    Updated: 2022/05/24 15:14:48 by cboudrin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/env/env.c \
 			srcs/export/export_display.c \
 			srcs/export/export.c \
+			srcs/pwd/pwd.c \
 			srcs/main/get_input.c \
 			srcs/main/info_utils.c \
 			srcs/main/main.c

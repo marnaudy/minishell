@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   info_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 12:28:25 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 12:39:11 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/24 15:41:24 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_general_info	*free_general_info(t_general_info *info)
 	{
 		free_env_list(&info->env);
 		free(info->prog_name);
+		free(info->cwd);
 		free_tree(&info->root);
 		free(info);
 	}
@@ -31,10 +32,7 @@ t_general_info	*init_info(char *arg0, char **envp)
 
 	info = ft_calloc(1, sizeof(t_general_info));
 	if (!info)
-	{
-		perror(arg0);
-		return (NULL);
-	}
+		return (perror(arg0), NULL);
 	if (init_env_list(envp, info))
 		return (free_general_info(info));
 	i = ft_strlen(arg0) - 1;
@@ -49,5 +47,8 @@ t_general_info	*init_info(char *arg0, char **envp)
 		free_general_info(info);
 		return (NULL);
 	}
+	info->cwd = getcwd(NULL, 0);
+	if (!info->cwd)
+		perror(arg0);
 	return (info);
 }
