@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:19:56 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/24 16:36:35 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/25 18:38:22 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	check_token_list(t_list *token_list, t_general_info *info,
 	{
 		ft_lstclear(&token_list, &free);
 		ft_doc_lstclear(doc_list);
+		info->exit_code = 2;
 		return (1);
 	}
 	return (0);
