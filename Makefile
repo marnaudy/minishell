@@ -6,7 +6,7 @@
 #    By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/24 16:19:51 by cboudrin         ###   ########.fr        #
+#    Updated: 2022/05/25 12:01:35 by cboudrin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/wildcard/wildcard.c \
 			srcs/path_search/split_path.c \
 			srcs/path_search/path_search_utils.c \
+			srcs/path_search/check_file.c \
 			srcs/path_search/path_search.c \
 			srcs/exec/write_file_error.c \
 			srcs/exec/redirect_input.c \

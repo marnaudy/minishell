@@ -3,53 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   path_search_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 17:06:33 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/16 17:10:02 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/25 12:00:53 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "path_search.h"
-#include <string.h>
-#include <errno.h>
-#include <unistd.h>
-
-static int	free_perror_ret(char *to_free, char *prog_name)
-{
-	perror(prog_name);
-	free(to_free);
-	return (-1);
-}
-
-static int	not_executable_error(char *prog_name, char *path)
-{
-	char	*to_print;
-	char	*to_free;
-
-	to_print = ft_strcat(": ", strerror(errno));
-	if (!to_print)
-		return (free_perror_ret(NULL, prog_name));
-	to_free = to_print;
-	to_print = ft_strcat(path, to_print);
-	if (!to_print)
-		return (free_perror_ret(to_free, prog_name));
-	free(to_free);
-	to_free = to_print;
-	to_print = ft_strcat(": ", to_print);
-	if (!to_print)
-		return (free_perror_ret(to_free, prog_name));
-	free(to_free);
-	to_free = to_print;
-	to_print = ft_strcat(prog_name, to_print);
-	if (!to_print)
-		return (free_perror_ret(to_free, prog_name));
-	free(to_free);
-	write(STDERR_FILENO, to_print, ft_strlen(to_print));
-	write(STDERR_FILENO, "\n", 1);
-	free(to_print);
-	return (1);
-}
 
 char	*ft_strcat_with_slash(char *s1, char *s2)
 {
@@ -80,9 +41,22 @@ char	*ft_strcat_with_slash(char *s1, char *s2)
 int	no_path_search(char *arg0, char **path, char *prog_name)
 {
 	*path = arg0;
-	if (access(*path, X_OK))
-		return (not_executable_error(prog_name, *path));
-	return (0);
+	return (check_file(arg0, prog_name, 0));
+}
+
+int	command_not_found(char *prog_name, char *arg0)
+{
+	char	*to_print;
+
+	to_print = ft_strcat(arg0, ": command not found\n");
+	if (!to_print)
+	{
+		perror(prog_name);
+		return (-1);
+	}
+	write(STDERR_FILENO, to_print, ft_strlen(to_print));
+	free(to_print);
+	return (127);
 }
 
 int	search_path_array(char *arg0, char **path,
@@ -90,6 +64,7 @@ int	search_path_array(char *arg0, char **path,
 {
 	char	*full_path;
 	int		i;
+	int		ret;
 
 	i = 0;
 	while (path_arr[i])
@@ -99,17 +74,15 @@ int	search_path_array(char *arg0, char **path,
 		else
 			full_path = ft_strcat(path_arr[i], arg0);
 		if (!full_path)
-		{
-			perror(prog_name);
-			return (-1);
-		}
-		if (!access(full_path, X_OK))
-		{
+			return (free_perror_and_ret(NULL, prog_name, 1, -1));
+		ret = check_file(full_path, prog_name, 1);
+		if (ret == 0)
 			*path = full_path;
-			return (0);
-		}
-		free(full_path);
+		else
+			free(full_path);
+		if (ret != 1)
+			return (ret);
 		i++;
 	}
-	return (not_executable_error(prog_name, arg0));
+	return (command_not_found(prog_name, arg0));
 }
