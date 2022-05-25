@@ -6,7 +6,7 @@
 /*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/24 16:58:52 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/25 12:43:57 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,5 @@ int				disable_stdout(char *prog_name);
 int				restore_stdout(int fd_save, char *prog_name);
 t_general_info	*free_general_info(t_general_info *info);
 t_general_info	*init_info(char *arg0, char **envp);
-
+char			*ft_strcat_with_slash(char *s1, char *s2);
 #endif
