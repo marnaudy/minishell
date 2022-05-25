@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_subshell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 14:21:43 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/19 16:31:44 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:10:59 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	exec_subshell_node(t_tree *node, t_general_info *info, int is_child)
 		return (-1);
 	if (pid == 0)
 		exec_subshell_in_child(node, info);
-	waitpid(pid, &ret, 0);
-	info->exit_code = WEXITSTATUS(ret);
+	wait_child(pid, info);
 	return (0);
 }

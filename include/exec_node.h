@@ -6,7 +6,7 @@
 /*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:38:31 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/25 13:05:00 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:09:45 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ int		export(t_tree *node, int fd_out, t_general_info *info);
 int		pwd(int fd_out, t_general_info *info);
 int		exit_builtin(t_tree *node, int fd_out, t_general_info *info);
 int		cd(t_tree *node, t_general_info *info, int fd_out);
+void	wait_child(int pid, t_general_info *info);
 
 #endif

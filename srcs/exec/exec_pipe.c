@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 14:56:37 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/19 18:26:21 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:10:51 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,16 @@ static void	wait_pipe_children(int *pid_arr, int nb_children,
 				t_general_info *info)
 {
 	int	i;
-	int	status;
 
 	i = 0;
 	while (i < nb_children)
 	{
-		waitpid(pid_arr[i], &status, 0);
+		if (i == nb_children - 1)
+			wait_child(pid_arr[i], info);
+		else
+			waitpid(pid_arr[i], NULL, 0);
 		i++;
 	}
-	info->exit_code = WEXITSTATUS(status);
 	free(pid_arr);
 }
 

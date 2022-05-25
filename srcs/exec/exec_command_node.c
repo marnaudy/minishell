@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command_node.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:43:58 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 12:54:34 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:11:04 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	expand_exec_command_node(t_tree *node, t_general_info *info, int is_child)
 		return (-1);
 	if (pid == 0)
 		exec_command_node(node, info);
-	waitpid(pid, &ret, 0);
-	info->exit_code = WEXITSTATUS(ret);
+	wait_child(pid, info);
 	return (0);
 }
