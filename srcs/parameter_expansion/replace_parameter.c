@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_parameter.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 11:48:00 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 12:42:14 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/25 15:08:27 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,13 @@ static int	replace_parameter_brace(char **str, int *idx,
 
 	param_len = parameter_len(*str, *idx);
 	if (param_len == -1)
-		return (bad_sub_message(&(*str)[*idx], prog_name, 0));
+		return (bad_sub_message(*str, prog_name, 0));
 	parameter = ft_substr(&(*str)[2], *idx, param_len - 3);
 	if (!parameter)
 		return (-1);
 	if (!is_valid_parameter(parameter, -1))
 		return (free_and_ret(parameter, NULL,
-				bad_sub_message(parameter, prog_name, 1)));
+				bad_sub_message(*str, prog_name, 0)));
 	value = fetch_value(env_list, parameter);
 	new_str = replace_in_str(*str, *idx, param_len, value);
 	if (!new_str)
