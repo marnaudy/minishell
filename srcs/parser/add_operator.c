@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:23:45 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/12 15:17:33 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/25 18:11:27 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,18 @@ static int	add_pipe_children(t_tree **pipe_node, t_list **token_list,
 	while (i < nb_children)
 	{
 		del_first_token(token_list);
-		if (operator_type((char *)(*token_list)->content) == nothing)
+		if (operator_type((char *)(*token_list)->content) == open_p)
+		{
+			if (add_parentheses(pipe_node, token_list, doc_list, prog_name))
+				return (-1);
+		}
+		else
 		{
 			(*pipe_node)->pipe_children[i]
 				= new_command_node(token_list, doc_list, prog_name);
 			if (!(*pipe_node)->pipe_children[i])
 				return (-1);
 		}
-		else
-		{
-			if (add_parentheses(pipe_node, token_list, doc_list, prog_name))
-				return (-1);
-		}	
 		i++;
 	}
 	(*pipe_node)->pipe_children[i] = NULL;
