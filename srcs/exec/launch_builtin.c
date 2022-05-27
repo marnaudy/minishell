@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 18:00:24 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/25 14:54:39 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:34:54 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,8 @@ static int	open_files_builtin(int *fd_out,
 {
 	int	fd_in;
 
-	fd_in = redirect_input(node, 0, info);
-	if (fd_in < 0)
+	if (open_redirects(node, info, &fd_in, fd_out))
 		return (-1);
-	*fd_out = redirect_output(node, 0, info->prog_name);
-	if (*fd_out < 0)
-	{
-		if (fd_in != STDIN_FILENO)
-			close(fd_in);
-		return (-1);
-	}
 	if (fd_in != STDIN_FILENO)
 		close(fd_in);
 	return (0);

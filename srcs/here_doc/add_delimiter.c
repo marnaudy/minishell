@@ -6,28 +6,30 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:22:37 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/10 15:02:10 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/26 20:02:16 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "here_doc.h"
 
-static t_doc_list	*ft_doc_lstnew(char *content, int is_quoted)
+static t_redirect_list	*ft_redirect_lstnew(char *content, int is_quoted,
+							enum e_operator type)
 {
-	t_doc_list	*new;
+	t_redirect_list	*new;
 
-	new = malloc(sizeof(t_doc_list));
+	new = malloc(sizeof(t_redirect_list));
 	if (!new)
 		return (NULL);
 	new->content = content;
 	new->is_quoted = is_quoted;
+	new->type = type;
 	new->next = NULL;
 	return (new);
 }
 
-static void	ft_doc_lstadd_back(t_doc_list **alst, t_doc_list *new)
+void	ft_redirect_lstadd_back(t_redirect_list **alst, t_redirect_list *new)
 {
-	t_doc_list	*lst;
+	t_redirect_list	*lst;
 
 	if (*alst == NULL)
 	{
@@ -40,9 +42,9 @@ static void	ft_doc_lstadd_back(t_doc_list **alst, t_doc_list *new)
 	lst->next = new;
 }
 
-void	ft_doc_lstclear(t_doc_list **lst)
+void	ft_redirect_lstclear(t_redirect_list **lst)
 {
-	t_doc_list	*to_free;
+	t_redirect_list	*to_free;
 
 	if (lst == NULL)
 		return ;
@@ -63,19 +65,20 @@ static int	contains_quote(char *delimiter)
 }
 
 int	add_delimiter(t_list *token_list,
-	char *prog_name, t_doc_list **doc_list)
+	char *prog_name, t_redirect_list **doc_list)
 {
-	t_doc_list	*new_doc;
-	char		*delimiter;
+	t_redirect_list	*new_doc;
+	char			*delimiter;
 
 	delimiter = ft_strdup((char *) token_list->next->content);
 	if (!delimiter)
 	{
 		perror(prog_name);
-		ft_doc_lstclear(doc_list);
+		ft_redirect_lstclear(doc_list);
 		return (-1);
 	}
-	new_doc = ft_doc_lstnew(delimiter, contains_quote(delimiter));
+	new_doc = ft_redirect_lstnew(delimiter,
+			contains_quote(delimiter), here_doc);
 	if (!new_doc || quote_removal(delimiter, prog_name))
 	{
 		if (!new_doc)
@@ -83,9 +86,9 @@ int	add_delimiter(t_list *token_list,
 		else
 			free(new_doc);
 		free(delimiter);
-		ft_doc_lstclear(doc_list);
+		ft_redirect_lstclear(doc_list);
 		return (-1);
 	}
-	ft_doc_lstadd_back(doc_list, new_doc);
+	ft_redirect_lstadd_back(doc_list, new_doc);
 	return (0);
 }

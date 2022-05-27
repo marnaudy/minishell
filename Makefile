@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+         #
+#    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/05/25 15:50:13 by cboudrin         ###   ########.fr        #
+#    Updated: 2022/05/27 15:37:09 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/here_doc/add_delimiter.c \
 			srcs/here_doc/get_delimiters.c \
 			srcs/here_doc/read_here_doc.c \
+			srcs/here_doc/write_here_doc.c \
 			srcs/parser/parser_utils.c \
 			srcs/parser/add_redirection.c \
 			srcs/parser/new_command_node.c \
@@ -55,11 +56,10 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/path_search/check_file.c \
 			srcs/path_search/path_search.c \
 			srcs/exec/write_file_error.c \
-			srcs/exec/redirect_input.c \
-			srcs/exec/redirect_output.c \
+			srcs/exec/open_redirects.c \
 			srcs/exec/ambiguous_redirect.c \
-			srcs/exec/expand_filenames.c \
-			srcs/exec/expand_node.c \
+			srcs/exec/expand_redirect.c \
+			srcs/exec/expand_args.c \
 			srcs/exec/wait_child.c \
 			srcs/exec/exec_command_node.c \
 			srcs/exec/launch_builtin.c \

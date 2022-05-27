@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_here_doc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:51:15 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/24 11:27:33 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/26 19:34:53 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	print_delimiter_error(char *delimiter, char *prog_name)
 	return (0);
 }
 
-static int	add_input(t_doc_list *doc, char *input, char *prog_name)
+static int	add_input(t_redirect_list *doc, char *input, char *prog_name)
 {
 	char	*to_free;
 
@@ -60,7 +60,7 @@ static int	add_input(t_doc_list *doc, char *input, char *prog_name)
 	return (0);
 }
 
-static int	read_here_doc(t_doc_list *doc, char *prog_name)
+static int	read_here_doc(t_redirect_list *doc, char *prog_name)
 {
 	char	*input;
 	char	*delimiter;
@@ -91,10 +91,10 @@ static int	read_here_doc(t_doc_list *doc, char *prog_name)
 // nb token is the index of the incorrect token (counting from 1)
 // 0 means they're all ok
 int	read_all_here_docs(t_list *token_list, char *prog_name,
-	int nb_token, t_doc_list **doc_list)
+	int nb_token, t_redirect_list **doc_list)
 {
-	t_doc_list	*doc;
-	int			fd_save;
+	t_redirect_list	*doc;
+	int				fd_save;
 
 	if (!isatty(STDIN_FILENO))
 	{

@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:13:53 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 14:26:11 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/26 20:05:19 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	add_token_to_arg(t_list **token_list, t_list **arg_list)
 	*token_list = save;
 }
 
-t_tree	*new_command_node(t_list **token_list, t_doc_list **doc_list,
+t_tree	*new_command_node(t_list **token_list, t_redirect_list **doc_list,
 			char *prog_name)
 {
 	t_tree			*new_tree;
@@ -31,13 +31,19 @@ t_tree	*new_command_node(t_list **token_list, t_doc_list **doc_list,
 	op_type = operator_type((char *)(*token_list)->content);
 	new_tree = init_tree((char *)(*token_list)->content, prog_name);
 	if (!new_tree)
+	{
+		perror(prog_name);
 		return (NULL);
+	}
 	while ((*token_list) && op_type <= here_doc)
 	{
 		if (op_type == nothing)
 			add_token_to_arg(token_list, &new_tree->arg);
-		else
-			add_redirection(new_tree, token_list, doc_list, prog_name);
+		else if (add_redirection(new_tree, token_list, doc_list, prog_name))
+		{
+			free_tree(&new_tree);
+			return (NULL);
+		}
 		if (*token_list)
 			op_type = operator_type((char *)(*token_list)->content);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command_node.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:43:58 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/25 16:11:04 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:33:38 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,8 @@ static char	*prepare_exec(t_tree *node, t_general_info *info, char ***argv)
 	int		ret;
 	char	*path;
 
-	ret = redirect_input(node, 1, info);
-	if (ret < 0)
-		exit_wait_child(info, ret);
-	ret = redirect_output(node, 1, info->prog_name);
-	if (ret < 0)
-		exit_wait_child(info, ret);
+	if (redirect(node, info))
+		exit_wait_child(info, 1);
 	if (!node->arg)
 		exit_wait_child(info, 0);
 	*argv = list_to_tab(node->arg, info->prog_name);
@@ -61,7 +57,7 @@ int	expand_exec_command_node(t_tree *node, t_general_info *info, int is_child)
 	int	ret;
 	int	pid;
 
-	ret = expand_node(node, info);
+	ret = expand_args(node, info);
 	if (ret)
 		return (exit_command_node(info, is_child, ret));
 	if (is_builtin(node))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_node.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:38:31 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/25 16:09:45 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:30:39 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 
+int		expand_args(t_tree *node, t_general_info *info);
+int		expand_redirect(t_redirect_list *redirect, t_general_info *info);
 int		print_file_error(char *prog_name, char *file_name);
-int		redirect_input(t_tree *node, int is_child, t_general_info *info);
-int		redirect_output(t_tree *node, int is_child, char *prog_name);
+int		open_redirects(t_tree *node, t_general_info *info,
+			int *fd_in, int *fd_out);
+int		redirect(t_tree *node, t_general_info *info);
 int		split_and_wildcard_file(t_tree *node, char *prog_name);
 int		print_ambiguous_redirect(char *prog_name);
 int		is_builtin(t_tree *node);

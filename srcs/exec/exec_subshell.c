@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_subshell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 14:21:43 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/25 16:10:59 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:35:36 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,8 @@ static void	exec_subshell_in_child(t_tree *node, t_general_info *info)
 {
 	int	ret;
 
-	ret = redirect_input(node, 1, info);
-	if (ret < 0)
-		exit_wait_child(info, ret);
-	ret = redirect_output(node, 1, info->prog_name);
-	if (ret < 0)
-		exit_wait_child(info, ret);
+	if (redirect(node, info))
+		exit_wait_child(info, 1);
 	ret = exec_node(node->left, info, 1);
 	if (ret)
 		exit_wait_child(info, ret);
@@ -30,12 +26,8 @@ static void	exec_subshell_in_child(t_tree *node, t_general_info *info)
 
 int	exec_subshell_node(t_tree *node, t_general_info *info, int is_child)
 {
-	int	ret;
 	int	pid;
 
-	ret = expand_node(node, info);
-	if (ret)
-		return (exit_command_node(info, is_child, ret));
 	if (is_child)
 		exec_subshell_in_child(node, info);
 	pid = fork();

@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 11:33:31 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 14:24:52 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/26 20:04:32 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,15 @@ void	del_first_token(t_list **token_list)
 	ft_lstdelone(to_free, &free);
 }
 
-static void	clear_file_list(t_file_list **list)
+static void	clear_redirect_list(t_redirect_list **list)
 {
-	t_file_list	*to_free;
+	t_redirect_list	*to_free;
 
 	while (*list)
 	{
 		to_free = *list;
 		*list = (*list)->next;
-		free(to_free->name);
+		free(to_free->content);
 		free(to_free);
 	}
 }
@@ -91,9 +91,7 @@ void	free_tree(t_tree **tree)
 	}
 	free((*tree)->pipe_children);
 	ft_lstclear(&(*tree)->arg, &free);
-	ft_doc_lstclear(&(*tree)->here_doc);
-	ft_lstclear(&(*tree)->infile, &free);
-	clear_file_list(&(*tree)->outfile);
+	clear_redirect_list(&(*tree)->redirects);
 	free(*tree);
 	*tree = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:23:45 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/25 18:11:27 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/26 20:06:13 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	count_pipes(t_list *token_list)
 }
 
 static int	add_pipe_children(t_tree **pipe_node, t_list **token_list,
-				t_doc_list **doc_list, char *prog_name)
+				t_redirect_list **doc_list, char *prog_name)
 {
 	int		i;
 	int		nb_children;
@@ -72,8 +72,8 @@ static int	add_pipe_children(t_tree **pipe_node, t_list **token_list,
 	return (0);
 }
 
-int	add_pipe(t_tree **working_node, t_list **token_list, t_doc_list **doc_list,
-		char *prog_name)
+int	add_pipe(t_tree **working_node, t_list **token_list,
+		t_redirect_list **doc_list, char *prog_name)
 {
 	t_tree	*new_node;
 

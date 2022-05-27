@@ -6,14 +6,14 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:01:09 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/10 12:22:50 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/26 19:33:49 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "here_doc.h"
 
 int	get_delimiters(t_list *token_list, char *prog_name,
-	int nb_token, t_doc_list **doc_list)
+	int nb_token, t_redirect_list **doc_list)
 {
 	int			i;
 

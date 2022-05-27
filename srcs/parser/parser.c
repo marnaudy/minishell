@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:33:55 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/12 15:22:29 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/26 20:06:35 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void	add_to_node(t_tree **working_node, t_tree *new_node)
 }
 
 static int	free_error(t_tree **root,
-				t_list **token_list, t_doc_list **doc_list)
+				t_list **token_list, t_redirect_list **doc_list)
 {
 	free_tree(root);
 	ft_lstclear(token_list, &free);
-	ft_doc_lstclear(doc_list);
+	ft_redirect_lstclear(doc_list);
 	return (-1);
 }
 
@@ -52,7 +52,7 @@ static t_tree	**get_working_node(t_tree **root)
 }
 
 static int	add_node(t_tree **root, t_list **tk_list,
-				t_doc_list **doc_list, char *prog_name)
+				t_redirect_list **doc_list, char *prog_name)
 {
 	t_tree			*new_node;
 	int				op_type;
@@ -75,7 +75,7 @@ static int	add_node(t_tree **root, t_list **tk_list,
 }
 
 int	parser(t_tree **root, t_list **tk_list,
-		t_doc_list **doc_list, char *prog_name)
+		t_redirect_list **doc_list, char *prog_name)
 {
 	*root = NULL;
 	while (*tk_list)

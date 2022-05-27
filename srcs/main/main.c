@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:19:56 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/25 18:38:22 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:36:38 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_list	*get_token_list(t_general_info *info)
 }
 
 int	check_token_list(t_list *token_list, t_general_info *info,
-		t_doc_list **doc_list)
+		t_redirect_list **doc_list)
 {
 	int	syntax_ret;
 
@@ -65,21 +65,21 @@ int	check_token_list(t_list *token_list, t_general_info *info,
 	if (syntax_ret)
 	{
 		ft_lstclear(&token_list, &free);
-		ft_doc_lstclear(doc_list);
+		ft_redirect_lstclear(doc_list);
 		info->exit_code = 2;
 		return (1);
 	}
 	return (0);
 }
 
-void	parse_and_exec(t_list *token_list, t_doc_list *here_doc_list,
+void	parse_and_exec(t_list *token_list, t_redirect_list *here_doc_list,
 		t_general_info *info)
 {
 	if (parser(&info->root, &token_list, &here_doc_list,
 			info->prog_name) < 0)
 	{
 		ft_lstclear(&token_list, &free);
-		ft_doc_lstclear(&here_doc_list);
+		ft_redirect_lstclear(&here_doc_list);
 		info->exit_code = 1;
 		exit_minishell(info);
 	}
@@ -93,9 +93,9 @@ void	parse_and_exec(t_list *token_list, t_doc_list *here_doc_list,
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_list			*token_list;
-	t_doc_list		*here_doc_list;
-	t_general_info	*info;
+	t_list				*token_list;
+	t_redirect_list		*here_doc_list;
+	t_general_info		*info;
 
 	(void)argc;
 	info = init_info(argv[0], envp);
