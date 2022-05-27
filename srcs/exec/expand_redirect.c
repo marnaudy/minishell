@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:02:58 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/26 19:41:41 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/27 16:00:25 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,24 @@ static int	expand_filename(char **filename, t_general_info *info)
 
 int	expand_redirect(t_redirect_list *redirect, t_general_info *info)
 {
+	int		ret;
+	char	*token_save;
+
 	if (redirect->type == here_doc)
 	{
 		if (redirect->is_quoted)
 			return (0);
 		return (replace_all_parameters(&redirect->content, info, 1));
 	}
-	return (expand_filename(&redirect->content, info));
+	token_save = ft_strdup(redirect->content);
+	if (!token_save)
+	{
+		perror(info->prog_name);
+		return (-1);
+	}
+	ret = expand_filename(&redirect->content, info);
+	if (ret == 1)
+		print_ambiguous_redirect(token_save, info->prog_name);
+	free(token_save);
+	return (ret);
 }

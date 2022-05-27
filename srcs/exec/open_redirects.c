@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:08:31 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/27 15:39:18 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/27 16:09:28 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	redirect(t_tree *node, t_general_info *info)
 {
 	int	fd_in;
 	int	fd_out;
-	int ret;
+	int	ret;
 
 	ret = open_redirects(node, info, &fd_in, &fd_out);
 	if (ret)

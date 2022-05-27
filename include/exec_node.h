@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:38:31 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/27 15:30:39 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:59:39 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		open_redirects(t_tree *node, t_general_info *info,
 			int *fd_in, int *fd_out);
 int		redirect(t_tree *node, t_general_info *info);
 int		split_and_wildcard_file(t_tree *node, char *prog_name);
-int		print_ambiguous_redirect(char *prog_name);
+int		print_ambiguous_redirect(char *token, char *prog_name);
 int		is_builtin(t_tree *node);
 int		launch_builtin(t_tree *node, t_general_info *info);
 int		exit_command_node(t_general_info *info, int is_child, int ret);
