@@ -6,11 +6,18 @@
 /*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:14:18 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/05/24 17:04:31 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/31 14:01:58 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec_node.h"
+
+int	is_overflow(int n)
+{
+	if (n > 2147483647)
+		return (1);
+	return (0);
+}
 
 int	is_numeric_argument(char *str)
 {
@@ -41,7 +48,7 @@ int	get_exit_code(t_list *arg, t_general_info *info)
 	if (!arg)
 		return (0);
 	arg1 = (char *)arg->content;
-	if (!is_numeric_argument(arg1))
+	if (!is_numeric_argument(arg1) || !is_overflow(ft_atoi(arg1)))
 	{
 		ft_putstr_fd(info->prog_name, STDERR_FILENO);
 		ft_putstr_fd(": exit: ", STDERR_FILENO);
