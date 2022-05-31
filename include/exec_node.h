@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_node.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:38:31 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/27 15:59:39 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/31 13:38:55 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int		export(t_tree *node, int fd_out, t_general_info *info);
 int		pwd(int fd_out, t_general_info *info);
 int		exit_builtin(t_tree *node, int fd_out, t_general_info *info);
 int		cd(t_tree *node, t_general_info *info, int fd_out);
+int		update_pwd(t_general_info *info);
 void	wait_child(int pid, t_general_info *info);
 
 #endif
