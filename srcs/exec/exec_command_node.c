@@ -6,7 +6,7 @@
 /*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:43:58 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/31 16:52:57 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/31 18:12:18 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*prepare_exec(t_tree *node, t_general_info *info, char ***argv)
 		else
 		{
 			free(*argv);
-			exit_wait_child(info, -1);
+			exit_wait_child(info, ret);
 		}
 	}
 	return (path);
