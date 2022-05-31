@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_all_parameters.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:36:29 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/09 12:13:27 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/31 16:12:11 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	replace_all_parameters(char **str, t_general_info *info, int ignore_quotes)
 
 	idx = 0;
 	is_quoted = 0;
-	while ((*str)[idx])
+	while (*str && (*str)[idx])
 	{
 		if ((*str)[idx] == '\"' && !is_escaped(*str, idx))
 			is_quoted = !is_quoted;
