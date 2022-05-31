@@ -6,7 +6,7 @@
 /*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:52:14 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/05/24 15:07:53 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/31 14:22:17 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	get_key_and_val(char *arg, t_general_info *info, char **key, char **value)
 	{
 		ft_putstr_fd("minishell: export: `", STDERR_FILENO);
 		ft_putstr_fd(*key, STDERR_FILENO);
+		ft_putstr_fd(&arg[i], STDERR_FILENO);
 		ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
-		free(*key);
-		return (1);
+		return (free_and_ret(*key, NULL, 1));
 	}
 	if (arg[i] == '=')
 		*value = ft_strdup(arg + i + 1);

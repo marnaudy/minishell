@@ -6,7 +6,7 @@
 /*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 12:06:11 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/05/31 13:38:40 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/31 14:34:43 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static int	check_destination(char *dest, char *prog_name, char *arg0)
 {
 	struct stat	buf;
 
+	if (!*arg0)
+		return (0);
 	if (access(dest, F_OK))
 	{
 		ft_putstr_fd(prog_name, STDERR_FILENO);

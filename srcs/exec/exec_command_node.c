@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command_node.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:43:58 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/27 15:33:38 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/31 14:42:24 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ static char	*prepare_exec(t_tree *node, t_general_info *info, char ***argv)
 	if (ret)
 	{
 		free(*argv);
-		exit_wait_child(info, ret);
+		if (ret == -1)
+			exit_wait_child(info, -1);
+		else if (ret == -2)
+			exit_wait_child(info, 0);
 	}
 	return (path);
 }
