@@ -6,7 +6,7 @@
 /*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:14:18 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/05/31 14:01:58 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/05/31 14:47:29 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int	exit_builtin(t_tree *node, int fd_out, t_general_info *info)
 
 	if (fd_out != STDOUT_FILENO)
 		close(fd_out);
-	write(STDERR_FILENO, "exit\n", 5);
+	if (isatty(STDIN_FILENO))
+		write(STDERR_FILENO, "exit\n", 5);
 	exit_code = get_exit_code(node->arg->next, info);
 	if (node->arg->next && node->arg->next->next)
 	{
