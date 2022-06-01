@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_node.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:38:31 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/31 13:38:55 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/06/01 14:49:27 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		expand_exec_command_node(t_tree *node, t_general_info *info,
 int		echo(t_tree *node, int fd_out);
 int		unset(t_tree *node, t_general_info *info, int fd_out);
 int		env(t_general_info *info, int fd_out);
+void	sort_env_arr(t_env_list *arr, int size);
 int		display_export_env(t_general_info *info, int fd_out);
 int		export(t_tree *node, int fd_out, t_general_info *info);
 int		pwd(int fd_out, t_general_info *info);

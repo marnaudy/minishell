@@ -3,62 +3,111 @@
 /*                                                        :::      ::::::::   */
 /*   export_display.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:32:30 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/05/24 15:00:07 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/06/01 14:46:19 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec_node.h"
 
-char	*add_quotes(char *str, char *prog_name)
+int	env_size(t_env_list *env)
 {
-	char	*new;
-	int		i;
+	int	i;
 
-	new = ft_calloc(ft_strlen(str) + 4, sizeof(char));
-	if (!new)
+	i = 0;
+	while (env)
+	{
+		env = env->next;
+		i++;
+	}
+	return (i);
+}
+
+char	*key_val_pair_to_str(char *key, char *value, char *prog_name)
+{
+	int		len;
+	char	*str;
+
+	len = ft_strlen(key) + ft_strlen(value) + ft_strlen("export =\"\"\n") + 1;
+	str = ft_calloc(len, sizeof(char));
+	if (!str)
+	{
+		perror(prog_name);
+		return (NULL);
+	}
+	ft_strlcpy(str, "export ", len);
+	ft_strlcat(str, key, len);
+	if (value)
+	{
+		ft_strlcat(str, "=\"", len);
+		ft_strlcat(str, value, len);
+		ft_strlcat(str, "\"\n", len);
+	}
+	else
+		ft_strlcat(str, "\n", len);
+	return (str);
+}
+
+t_env_list	*get_env_arr(t_env_list *env_list, char *prog_name, int *size)
+{
+	int			i;
+	t_env_list	*arr;
+
+	*size = env_size(env_list);
+	arr = ft_calloc(*size, sizeof(t_env_list));
+	if (!arr)
 	{
 		perror(prog_name);
 		return (NULL);
 	}
 	i = 0;
-	while (str[i] != '=')
+	while (env_list)
 	{
-		new[i] = str[i];
+		arr[i].key = env_list->key;
+		arr[i].value = env_list->value;
+		i++;
+		env_list = env_list->next;
+	}
+	return (arr);
+}
+
+int	print_env_arr(t_env_list *env_arr, int size, int fd_out, char *prog_name)
+{
+	char	*to_print;
+	int		i;
+
+	i = 0;
+	while (i < size)
+	{
+		to_print
+			= key_val_pair_to_str(env_arr[i].key, env_arr[i].value, prog_name);
+		if (!to_print)
+			return (-1);
+		ft_putstr_fd(to_print, fd_out);
+		free(to_print);
 		i++;
 	}
-	new[i] = str[i];
-	new[i + 1] = '\"';
-	ft_strlcat(new, &str[i + 1], ft_strlen(str) + 4);
-	i = ft_strlen(new);
-	new[i] = '\"';
-	new[i + 1] = '\n';
-	return (new);
+	return (0);
 }
 
 int	display_export_env(t_general_info *info, int fd_out)
 {
-	char	**envp;
-	char	*to_print;
-	int		i;
+	t_env_list	*env_arr;
+	int			size;
 
-	if (export_env(info, &envp))
+	env_arr = get_env_arr(info->env, info->prog_name, &size);
+	if (!env_arr)
 		return (-1);
-	i = 0;
-	while (envp[i])
+	sort_env_arr(env_arr, size);
+	if (print_env_arr(env_arr, size, fd_out, info->prog_name))
 	{
-		to_print = add_quotes(envp[i], info->prog_name);
-		if (!to_print)
-			return (-1);
-		write(fd_out, "export ", 7);
-		write(fd_out, to_print, ft_strlen(to_print));
-		free(to_print);
-		i++;
+		free(env_arr);
+		return (-1);
 	}
-	free_char_array_and_ret(envp, 0);
 	if (fd_out != STDOUT_FILENO)
 		close(fd_out);
+	free(env_arr);
 	return (0);
 }

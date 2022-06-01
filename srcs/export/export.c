@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:52:14 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/05/31 14:22:17 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/06/01 14:21:51 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,24 @@
 
 int	export_equal(char *key, char *value, t_general_info *info)
 {
+	char	*old_value;
+
+	if (!value)
+	{
+		old_value = fetch_value(info->env, key);
+		if (old_value)
+			value = ft_strdup(old_value);
+		else
+			value = NULL;
+		if (old_value && !value)
+		{
+			perror(info->prog_name);
+			return (-1);
+		}
+		if (add_to_env(info, key, value, 0))
+			return (-1);
+		return (0);
+	}
 	if (add_to_env(info, key, value, 1))
 		return (-1);
 	return (0);
@@ -66,8 +84,8 @@ int	get_key_and_val(char *arg, t_general_info *info, char **key, char **value)
 	else if (arg[i] == '+' && arg[i + 1] == '=')
 		*value = ft_strdup(arg + i + 2);
 	else
-		*value = ft_strdup("");
-	if (!*value)
+		*value = NULL;
+	if (!*value && (arg[i] == '=' || (arg[i] == '+' && arg[i + 1] == '=')))
 		return (free_perror_and_ret(*key, info->prog_name, 1, -1));
 	return (0);
 }

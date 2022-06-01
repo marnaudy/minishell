@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:49:06 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 12:46:33 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/01 12:27:18 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,28 @@ int	free_char_array_and_ret(char **arr, int ret)
 	return (ret);
 }
 
-int	export_env(t_general_info *info, char ***env_arr)
+int	add_underscore(char **env_arr, int idx, char *underscore, char *prog_name)
+{
+	t_env_list	new;
+
+	new.export = 1;
+	new.key = "_";
+	new.value = underscore;
+	new.next = NULL;
+	env_arr[idx] = export_key_val_pair(&new, prog_name);
+	if (!env_arr[idx])
+		return (-1);
+	return (0);
+}
+
+int	export_env(t_general_info *info, char ***env_arr, char *underscore)
 {
 	t_env_list	*list;
 	int			i;
 
-	*env_arr = ft_calloc(env_list_size(info->env) + 1, sizeof(char *));
+	*env_arr = ft_calloc(env_list_size(info->env) + 2, sizeof(char *));
 	if (!*env_arr)
-	{
-		perror(info->prog_name);
-		return (-1);
-	}
+		free_perror_and_ret(NULL, info->prog_name, 1, -1);
 	list = info->env;
 	i = 0;
 	while (list)
@@ -81,6 +92,8 @@ int	export_env(t_general_info *info, char ***env_arr)
 		}
 		list = list->next;
 	}
-	(*env_arr)[i] = NULL;
+	if (add_underscore(*env_arr, i, underscore, info->prog_name))
+		return (free_char_array_and_ret(*env_arr, -1));
+	(*env_arr)[i + 1] = NULL;
 	return (0);
 }

@@ -1,34 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   sort_env_arr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/23 17:23:43 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/01 12:28:35 by marnaudy         ###   ########.fr       */
+/*   Created: 2022/06/01 14:45:54 by marnaudy          #+#    #+#             */
+/*   Updated: 2022/06/01 14:47:39 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec_node.h"
 
-int	env(t_general_info *info, int fd_out)
+void	swap_pair(t_env_list *a, t_env_list *b)
 {
-	char	**envp;
-	int		i;
+	char	*tmp;
 
-	if (export_env(info, &envp, "env"))
-		return (-1);
+	tmp = a->key;
+	a->key = b->key;
+	b->key = tmp;
+	tmp = a->value;
+	a->value = b->value;
+	b->value = tmp;
+}
+
+void	sort_env_arr(t_env_list *arr, int size)
+{
+	int	i;
+	int	j;
+	int	smallest;
+
 	i = 0;
-	while (envp[i])
+	while (i < size - 1)
 	{
-		write(fd_out, envp[i], ft_strlen(envp[i]));
-		write(fd_out, "\n", 1);
-		free(envp[i]);
+		j = i;
+		smallest = i;
+		while (j < size)
+		{
+			if (ft_strcmp(arr[j].key, arr[smallest].key) < 0)
+				smallest = j;
+			j++;
+		}
+		swap_pair(&arr[i], &arr[smallest]);
 		i++;
 	}
-	free(envp);
-	if (fd_out != STDOUT_FILENO)
-		close(fd_out);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:26:38 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/23 12:14:27 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/01 12:18:21 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ int	init_env_list(char **envp, t_general_info *info)
 		}
 		i++;
 	}
+	remove_value(&info->env, "_");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/26 20:04:06 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/01 12:26:03 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ int				add_to_env(t_general_info *info, char *key,
 					char *value, int export);
 char			*fetch_value(t_env_list *list, char *key);
 int				remove_value(t_env_list **list, char *key);
-int				export_env(t_general_info *info, char ***env_arr);
+int				export_env(t_general_info *info,
+					char ***env_arr, char *underscore);
 int				free_char_array_and_ret(char **arr, int ret);
 int				is_valid_parameter(char *parameter, int len);
 int				skip_simple_quote(char *input, int idx, int *token_len);

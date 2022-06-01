@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command_node.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:43:58 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/31 18:12:18 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/06/01 12:28:08 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	exec_command_node(t_tree *node, t_general_info *info)
 	char	*path;
 
 	path = prepare_exec(node, info, &argv);
-	if (export_env(info, &envp))
+	if (export_env(info, &envp, path))
 		exit_command_node(info, 1, -1);
 	execve(path, argv, envp);
 	perror(info->prog_name);

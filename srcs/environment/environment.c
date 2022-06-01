@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:30:49 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/24 14:59:59 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/06/01 14:19:37 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	add_pair_to_list(t_env_list **list, t_env_list *new)
 		{
 			free(iter->value);
 			iter->value = new->value;
+			iter->export = new->export;
 			free(new->key);
 			free(new);
 			return ;
