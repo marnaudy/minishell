@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:34:50 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/09 12:21:19 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:54:57 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@ static int	parameter_len_no_brace(char *str, int start)
 		return (0);
 	if (str[start + 1] == '?')
 		return (2);
+	str[start] = 'a';
+	if (!is_escaped(str, start)
+		&& (str[start + 1] == '\"' || str[start + 1] == '\''))
+	{
+		str[start] = '$';
+		return (1);
+	}
+	str[start] = '$';
 	if (!is_valid_parameter(&str[start + 1], 1))
 		return (0);
 	len = 2;
