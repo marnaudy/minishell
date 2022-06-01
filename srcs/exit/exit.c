@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:14:18 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/06/01 14:57:17 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/01 17:18:19 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int	exit_builtin(t_tree *node, int fd_out, t_general_info *info)
 	{
 		ft_putstr_fd(info->prog_name, STDERR_FILENO);
 		ft_putstr_fd(": exit: too many arguments\n", STDERR_FILENO);
-		if (info->exit_code)
-			return (info->exit_code);
+		if (g_exit_code)
+			return (g_exit_code);
 		return (1);
 	}
 	free_general_info(info);

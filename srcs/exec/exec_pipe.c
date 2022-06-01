@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 14:56:37 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/25 16:10:51 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/06/01 17:21:34 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	exec_pipe_child(t_tree *node, t_general_info *info,
 	ret = exec_node(node, info, 1);
 	if (ret)
 		exit_command_node(info, 1, ret);
-	exit_command_node(info, 1, info->exit_code);
+	exit_command_node(info, 1, g_exit_code);
 }
 
 static int	*fork_pipe_children(t_tree *node, t_general_info *info,
@@ -70,8 +70,7 @@ static int	*fork_pipe_children(t_tree *node, t_general_info *info,
 	return (pid_arr);
 }
 
-static void	wait_pipe_children(int *pid_arr, int nb_children,
-				t_general_info *info)
+static void	wait_pipe_children(int *pid_arr, int nb_children)
 {
 	int	i;
 
@@ -79,7 +78,7 @@ static void	wait_pipe_children(int *pid_arr, int nb_children,
 	while (i < nb_children)
 	{
 		if (i == nb_children - 1)
-			wait_child(pid_arr[i], info);
+			wait_child(pid_arr[i]);
 		else
 			waitpid(pid_arr[i], NULL, 0);
 		i++;
@@ -109,6 +108,6 @@ int	exec_pipe(t_tree *node, t_general_info *info)
 		free(pid_arr);
 		return (-1);
 	}
-	wait_pipe_children(pid_arr, nb_com, info);
+	wait_pipe_children(pid_arr, nb_com);
 	return (0);
 }

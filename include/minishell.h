@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/01 12:26:03 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/01 17:24:55 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,10 @@ typedef struct s_general_info
 	char			*prog_name;
 	t_env_list		*env;
 	t_tree			*root;
-	int				exit_code;
 	char			*cwd;
 }	t_general_info;
+
+extern int	g_exit_code;
 
 int				is_blank(char c);
 int				free_and_ret(char *s1, char *s2, int ret);

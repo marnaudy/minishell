@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   wait_child.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:33:10 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/05/25 16:19:09 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/06/01 17:20:02 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec_node.h"
 #include <signal.h>
 
-void	wait_child(int pid, t_general_info *info)
+void	wait_child(int pid)
 {
 	int	status;
 	int	sig;
@@ -22,7 +22,7 @@ void	wait_child(int pid, t_general_info *info)
 	if (WIFSIGNALED(status))
 	{
 		sig = WTERMSIG(status);
-		info->exit_code = 128 + sig;
+		g_exit_code = 128 + sig;
 		if (sig == SIGBUS)
 			write(STDERR_FILENO, "Bus error (core dumped)\n", 24);
 		if (sig == SIGSEGV)
@@ -33,5 +33,5 @@ void	wait_child(int pid, t_general_info *info)
 			write(STDERR_FILENO, "Quit (core dumped)\n", 19);
 		return ;
 	}
-	info->exit_code = WEXITSTATUS(status);
+	g_exit_code = WEXITSTATUS(status);
 }
