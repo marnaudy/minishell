@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_all_parameters.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:36:29 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/31 16:12:11 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:52:43 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	replace_all_parameters(char **str, t_general_info *info, int ignore_quotes)
 		if (!ignore_quotes && !is_quoted
 			&& skip_simple_quote(*str, 0, &idx) == 0)
 			continue ;
-		ret = replace_parameter(str, &idx, info);
+		ret = replace_parameter(str, &idx, info, ignore_quotes);
 		if (ret)
 			return (ret);
 		idx++;
