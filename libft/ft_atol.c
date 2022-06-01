@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 11:25:16 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/06/01 11:39:16 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/06/01 14:56:10 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,24 @@ int	ft_atol(const char *nptr, long int *res)
 {
 	int		i;
 	int		sign;
-	char	*s;
 
 	*res = 0;
 	i = 0;
-	s = (char *) nptr;
 	sign = 1;
-	while (s[i] && (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13)))
+	while (nptr[i] && (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13)))
 		i++;
-	if (s[i] == '-' || s[i] == '+')
+	if (nptr[i] == '-' || nptr[i] == '+')
 	{
-		if (s[i] == '-')
+		if (nptr[i] == '-')
 			sign = -1;
 		i++;
 	}
-	while (s[i] >= '0' && s[i] <= '9')
+	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		if (*res >= 9223372036854775801
-			|| (*res == 922337203685477580 && s[i] > '7' + (sign == -1)))
+			|| (*res == 922337203685477580 && nptr[i] > '7' + (sign == -1)))
 			return (-1);
-		*res = *res * 10 + s[i] - '0';
+		*res = *res * 10 + nptr[i] - '0';
 		i++;
 	}
 	*res *= sign;

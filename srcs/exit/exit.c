@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:14:18 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/06/01 11:39:50 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/06/01 14:57:17 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec_node.h"
-
-int	is_overflow(unsigned long int n)
-{
-	unsigned long int i;
-
-	i = 0;
-	i--;
-	printf("%lu", i);
-	if (n > 9223372036854775807)
-		return (1);
-	return (0);
-}
 
 int	is_numeric_argument(char *str)
 {
