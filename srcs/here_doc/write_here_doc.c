@@ -6,14 +6,21 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:09:52 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/27 15:37:21 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/01 18:28:59 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "here_doc.h"
+#include <signal.h>
 
 static int	write_here_doc(char *here_doc, t_general_info *info, int pipe_fd[2])
 {
+	struct sigaction	sa;
+
+	sa.sa_flags = 0;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_handler = SIG_IGN;
+	sigaction(SIGPIPE, &sa, NULL);
 	close(pipe_fd[0]);
 	rl_clear_history();
 	write(pipe_fd[1], here_doc, ft_strlen(here_doc));

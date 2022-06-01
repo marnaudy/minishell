@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:19:56 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/01 17:22:51 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/01 18:08:54 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ t_list	*get_token_list(t_general_info *info)
 
 	input = get_input(info->prog_name);
 	if (!input)
+	{
+		if (isatty(STDIN_FILENO))
+			ft_putstr_fd("exit\n", STDERR_FILENO);
 		exit_minishell(info);
+	}
 	ret = lexer(&token_list, input, info->prog_name);
 	free(input);
 	if (ret < 0)
@@ -85,7 +89,7 @@ void	parse_and_exec(t_list *token_list, t_redirect_list *here_doc_list,
 		g_exit_code = 1;
 		exit_minishell(info);
 	}
-	if (exec_node(info->root, info, 0) < 0)
+	if (set_signals_exec(info->prog_name) || exec_node(info->root, info, 0) < 0)
 	{
 		g_exit_code = 1;
 		exit_minishell(info);
@@ -105,6 +109,11 @@ int	main(int argc, char **argv, char **envp)
 		return (-1);
 	while (1)
 	{
+		if (init_signals(info->prog_name))
+		{
+			g_exit_code = 1;
+			exit_minishell(info);
+		}
 		token_list = get_token_list(info);
 		if (!token_list || check_token_list(token_list, info, &here_doc_list))
 			continue ;

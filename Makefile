@@ -6,7 +6,7 @@
 #    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/06/01 14:48:39 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/06/01 17:40:35 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,6 +81,7 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/exit/exit.c \
 			srcs/main/get_input.c \
 			srcs/main/info_utils.c \
+			srcs/main/signals.c \
 			srcs/main/main.c
 
 HEADERS	=	include/lexer.h \
