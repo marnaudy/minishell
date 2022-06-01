@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:40:53 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/01 15:26:57 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:39:19 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int	split_add_to_list(t_list *list, int index, char *prog_name)
 	word = (char *) list->content;
 	if (trim_white_space(&word[index], &new_word, prog_name))
 		return (-1);
+	word[index] = '\0';
 	if (new_word == NULL)
 		return (0);
 	new_link = ft_lstnew(new_word);
@@ -49,7 +50,6 @@ static int	split_add_to_list(t_list *list, int index, char *prog_name)
 		free(new_word);
 		return (-1);
 	}
-	word[index] = '\0';
 	new_link->next = list->next;
 	list->next = new_link;
 	return (0);
