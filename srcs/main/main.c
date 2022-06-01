@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:19:56 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/27 15:36:38 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/01 11:08:21 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ t_list	*get_token_list(t_general_info *info)
 		exit_minishell(info);
 	}
 	if (ret)
+	{
+		info->exit_code = 2;
 		return (NULL);
+	}
 	return (token_list);
 }
 
