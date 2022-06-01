@@ -6,7 +6,7 @@
 /*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:14:18 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/05/31 18:28:27 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/06/01 11:39:50 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 int	is_overflow(unsigned long int n)
 {
+	unsigned long int i;
+
+	i = 0;
+	i--;
+	printf("%lu", i);
 	if (n > 9223372036854775807)
 		return (1);
 	return (0);
@@ -41,14 +46,15 @@ int	is_numeric_argument(char *str)
 	return (1);
 }
 
-int	get_exit_code(t_list *arg, t_general_info *info)
+long int	get_exit_code(t_list *arg, t_general_info *info)
 {
-	char	*arg1;
+	char		*arg1;
+	long int	res;
 
 	if (!arg)
 		return (0);
 	arg1 = (char *)arg->content;
-	if (!is_numeric_argument(arg1) || !is_overflow(ft_atoi(arg1)))
+	if (!is_numeric_argument(arg1) || ft_atol(arg1, &res))
 	{
 		ft_putstr_fd(info->prog_name, STDERR_FILENO);
 		ft_putstr_fd(": exit: ", STDERR_FILENO);
@@ -58,12 +64,12 @@ int	get_exit_code(t_list *arg, t_general_info *info)
 		rl_clear_history();
 		exit(2);
 	}
-	return (ft_atoi(arg1));
+	return (res);
 }
 
 int	exit_builtin(t_tree *node, int fd_out, t_general_info *info)
 {
-	int				exit_code;
+	long int		exit_code;
 	unsigned char	char_exit_code;
 
 	if (fd_out != STDOUT_FILENO)
@@ -82,7 +88,7 @@ int	exit_builtin(t_tree *node, int fd_out, t_general_info *info)
 	free_general_info(info);
 	rl_clear_history();
 	char_exit_code = (unsigned char) exit_code;
-	exit_code = (int) char_exit_code;
+	exit_code = (long int) char_exit_code;
 	exit(exit_code);
 	return (0);
 }
