@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_search_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 17:06:33 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/31 14:41:51 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:06:35 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ int	command_not_found(char *prog_name, char *arg0)
 {
 	char	*to_print;
 
-	if (!*arg0)
-		return (-2);
 	to_print = ft_strcat(arg0, ": command not found\n");
 	if (!to_print)
 	{

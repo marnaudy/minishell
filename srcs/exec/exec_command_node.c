@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:43:58 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/01 12:28:08 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:25:41 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,8 @@ static char	*prepare_exec(t_tree *node, t_general_info *info, char ***argv)
 			&path, info->env, info->prog_name);
 	if (ret)
 	{
-		if (ret == -2)
-			exit_wait_child(info, 0);
-		else
-		{
-			free(*argv);
-			exit_wait_child(info, ret);
-		}
+		free(*argv);
+		exit_wait_child(info, ret);
 	}
 	return (path);
 }
