@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:33:10 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/06/02 12:29:56 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 15:29:33 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	sig_int_wait(int sig)
 	(void)sig;
 	ft_putstr_fd("\n", STDOUT_FILENO);
 	g_exit_code = 130;
+}
+
+void	do_nothing(int sig)
+{
+	(void)sig;
 }
 
 int	set_signals_wait(void)
@@ -32,8 +37,8 @@ int	set_signals_wait(void)
 		perror(NULL);
 		return (-1);
 	}
-	sa.sa_flags = 0;
-	sa.sa_handler = SIG_IGN;
+	sa.sa_flags = SA_RESTART;
+	sa.sa_handler = &do_nothing;
 	if (sigaction(SIGQUIT, &sa, NULL))
 	{
 		perror(NULL);
