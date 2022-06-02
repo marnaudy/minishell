@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:22:37 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/26 20:02:16 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 23:32:45 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,24 +68,25 @@ int	add_delimiter(t_list *token_list,
 	char *prog_name, t_redirect_list **doc_list)
 {
 	t_redirect_list	*new_doc;
-	char			*delimiter;
+	char			*delim;
 
-	delimiter = ft_strdup((char *) token_list->next->content);
-	if (!delimiter)
+	if (!token_list->next || !token_list->next->content)
+		return (-1);
+	delim = ft_strdup((char *) token_list->next->content);
+	if (!delim)
 	{
 		perror(prog_name);
 		ft_redirect_lstclear(doc_list);
 		return (-1);
 	}
-	new_doc = ft_redirect_lstnew(delimiter,
-			contains_quote(delimiter), here_doc);
-	if (!new_doc || quote_removal(delimiter, prog_name))
+	new_doc = ft_redirect_lstnew(delim, contains_quote(delim), here_doc);
+	if (!new_doc || quote_removal(delim, prog_name))
 	{
 		if (!new_doc)
 			perror(prog_name);
 		else
 			free(new_doc);
-		free(delimiter);
+		free(delim);
 		ft_redirect_lstclear(doc_list);
 		return (-1);
 	}
