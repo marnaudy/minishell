@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:14:18 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/06/01 14:57:17 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 12:43:48 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ long int	get_exit_code(t_list *arg, t_general_info *info)
 	long int	res;
 
 	if (!arg)
-		return (0);
+		return (info->exit_code);
 	arg1 = (char *)arg->content;
 	if (!is_numeric_argument(arg1) || ft_atol(arg1, &res))
 	{
