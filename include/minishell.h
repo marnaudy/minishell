@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/02 11:51:25 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 11:55:27 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <readline/history.h>
 
 # define _GNU_SOURCE
+
+extern int	g_exit_code;
 
 enum e_operator
 {

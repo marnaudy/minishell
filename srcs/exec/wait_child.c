@@ -6,17 +6,18 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:33:10 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/06/02 11:50:11 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 12:09:28 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec_node.h"
 #include <signal.h>
 
-void	print_nl(int sig)
+void	sig_int_wait(int sig)
 {
 	(void)sig;
 	ft_putstr_fd("\n", STDOUT_FILENO);
+	g_exit_code = 130;
 }
 
 int	set_signals_wait(void)
@@ -25,7 +26,7 @@ int	set_signals_wait(void)
 
 	sa.sa_flags = SA_RESTART;
 	sigemptyset(&sa.sa_mask);
-	sa.sa_handler = &print_nl;
+	sa.sa_handler = &sig_int_wait;
 	if (sigaction(SIGINT, &sa, NULL))
 	{
 		perror(NULL);

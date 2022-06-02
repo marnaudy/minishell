@@ -6,11 +6,13 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:19:56 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/02 11:51:47 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 12:09:22 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_exit_code;
 
 void	exit_minishell(t_general_info *info)
 {
@@ -90,6 +92,9 @@ void	parse_and_exec(t_list *token_list, t_redirect_list *here_doc_list,
 		info->exit_code = 1;
 		exit_minishell(info);
 	}
+	if (g_exit_code)
+		info->exit_code = g_exit_code;
+	g_exit_code = 0;
 	if (set_signals_exec(info->prog_name) || exec_node(info->root, info, 0) < 0)
 	{
 		info->exit_code = 1;
@@ -108,11 +113,13 @@ int	main(int argc, char **argv, char **envp)
 	info = init_info(argv[0], envp);
 	if (!info)
 		return (-1);
+	g_exit_code = 0;
+	info->exit_code = 0;
 	while (1)
 	{
 		if (init_signals_read(info->prog_name))
 		{
-			g_exit_code = 1;
+			info->exit_code = 1;
 			exit_minishell(info);
 		}
 		token_list = get_token_list(info);
