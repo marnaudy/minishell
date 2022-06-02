@@ -6,11 +6,21 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 12:06:50 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/16 11:52:31 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 20:48:04 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wildcard.h"
+
+unsigned int	len_b4_slash(char *str)
+{
+	unsigned int	len;
+
+	len = 0;
+	while (str[len] && str[len] != '/')
+		len++;
+	return (len);
+}
 
 int	substitute_star(char *word, char *to_match)
 {
@@ -18,43 +28,45 @@ int	substitute_star(char *word, char *to_match)
 	int		j;
 
 	i = 0;
-	if (word[0] == '\0')
+	if (word[0] == '\0' || word[0] == '/')
 		return (ft_strlen(to_match));
 	while (to_match[i])
 	{
 		j = 0;
-		while (to_match[i + j] && word[j] == to_match[i + j] && word[j] != '*')
+		while (to_match[i + j] && word[j] == to_match[i + j] && word[j] != '/')
 			j++;
-		if (word[j] == '*' || (!word[j] && !to_match[i + j]))
+		if (!word[j] || (word[j] == '/' && !to_match[i + j]))
 			return (i);
 		i++;
 	}
 	return (-1);
 }
 
-int	is_match(char *word, char *to_match)
+int	is_match(t_wc_token *list, char *to_match)
 {
 	int	i;
-	int	j;
 
-	if (word[0] != '.' && to_match[0] == '.')
+	if (to_match[0] == '.' && list->is_wc)
 		return (0);
 	i = 0;
-	j = 0;
-	while (word[i])
+	while (list)
 	{
-		if (word[i] == '*' && !is_escaped(word, i))
+		if (!list->is_wc)
 		{
-			i++;
-			if (substitute_star(word + i, to_match + j) == -1)
+			if (ft_strncmp(to_match + i, list->text, len_b4_slash(list->text)))
 				return (0);
-			j += substitute_star(word + i, to_match + j);
+			i += len_b4_slash(list->text);
+			if (len_b4_slash(list->text) < ft_strlen(list->text))
+				return (1);
+			list = list->next;
 			continue ;
 		}
-		if (word[i] != to_match[j])
+		if (!list->next)
+			return (1);
+		if (substitute_star(list->next->text, to_match + i) < 0)
 			return (0);
-		j++;
-		i++;
+		i += substitute_star(list->next->text, to_match + i);
+		list = list->next;
 	}
-	return (!word[i] && !to_match[j]);
+	return (!to_match[i]);
 }

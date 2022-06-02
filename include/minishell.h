@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/02 16:31:47 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 19:26:30 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,6 @@ t_general_info	*init_info(char *arg0, char **envp);
 char			*ft_strcat_with_slash(char *s1, char *s2);
 int				init_signals_read(char *prog_name);
 int				set_signals_exec(char *prog_name);
+int				add_backslash(char **token, int start, int len);
 
 #endif

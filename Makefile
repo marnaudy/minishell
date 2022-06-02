@@ -6,7 +6,7 @@
 #    By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 17:15:05 by marnaudy          #+#    #+#              #
-#    Updated: 2022/06/01 17:40:35 by marnaudy         ###   ########.fr        #
+#    Updated: 2022/06/02 20:52:16 by marnaudy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,10 +45,11 @@ SRCS	=	srcs/lexer/lexer_parameter.c \
 			srcs/parser/add_parentheses.c \
 			srcs/parser/parser.c \
 			srcs/field_splitting/field_splitting.c \
-			srcs/wildcard/get_base_path.c \
+			srcs/wildcard/wildcard_utils.c \
 			srcs/wildcard/has_wildcard.c \
 			srcs/wildcard/lst_insert_sort.c \
 			srcs/wildcard/get_directory.c \
+			srcs/wildcard/split_wc_input.c \
 			srcs/wildcard/is_match.c \
 			srcs/wildcard/wildcard.c \
 			srcs/path_search/split_path.c \
@@ -100,7 +101,7 @@ OBJS	=	${SRCS:.c=.o}
 
 CC		=	cc
 
-CFLAGS	=	-Wall -Wextra -Werror -I./include -g
+CFLAGS	=	-Wall -Wextra -Werror -I./include
 
 RM		=	rm -f
 
