@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 16:14:18 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/06/02 14:03:47 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:54:44 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ long int	get_exit_code(t_list *arg, t_general_info *info)
 		ft_putstr_fd(arg1, STDERR_FILENO);
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
 		free_general_info(info);
-		rl_clear_history();
 		exit(2);
 	}
 	return (res);
@@ -74,7 +73,6 @@ int	exit_builtin(t_tree *node, int fd_out, t_general_info *info)
 		return (1);
 	}
 	free_general_info(info);
-	rl_clear_history();
 	char_exit_code = (unsigned char) exit_code;
 	exit_code = (long int) char_exit_code;
 	exit(exit_code);

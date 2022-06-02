@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:09:52 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/02 11:41:36 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:54:52 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static int	write_here_doc(char *here_doc, t_general_info *info, int pipe_fd[2])
 	sa.sa_handler = SIG_IGN;
 	sigaction(SIGPIPE, &sa, NULL);
 	close(pipe_fd[0]);
-	rl_clear_history();
 	write(pipe_fd[1], here_doc, ft_strlen(here_doc));
 	close(pipe_fd[1]);
 	free_general_info(info);

@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:19:56 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/02 12:09:22 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:54:56 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	exit_minishell(t_general_info *info)
 
 	ret = info->exit_code;
 	free_general_info(info);
-	rl_clear_history();
 	exit(ret);
 }
 
