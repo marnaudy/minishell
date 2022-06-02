@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 11:25:16 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/06/01 14:56:10 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 14:03:11 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_atol(const char *nptr, long int *res)
 	}
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		if (*res >= 9223372036854775801
+		if (*res >= 922337203685477581
 			|| (*res == 922337203685477580 && nptr[i] > '7' + (sign == -1)))
 			return (-1);
 		*res = *res * 10 + nptr[i] - '0';
