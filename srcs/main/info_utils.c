@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   info_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 12:28:25 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/24 15:41:24 by cboudrin         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:38:42 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,33 @@ t_general_info	*free_general_info(t_general_info *info)
 		free(info);
 	}
 	return (NULL);
+}
+
+void	exit_init(t_general_info *info, int print_error)
+{
+	if (print_error && info)
+		perror(info->prog_name);
+	free_general_info(info);
+	exit(-1);
+}
+
+void	init_pwd(t_general_info *info)
+{
+	char	*pwd;
+	char	*cwd;
+
+	if (!info->cwd)
+		return ;
+	pwd = ft_strdup("PWD");
+	if (!pwd)
+		exit_init(info, 1);
+	remove_value(&info->env, "PWD");
+	cwd = ft_strdup(info->cwd);
+	if (!cwd)
+		exit_init(info, 1);
+	if (add_to_env(info, pwd, cwd, 1))
+		exit_init(info, 0);
+	return ;
 }
 
 t_general_info	*init_info(char *arg0, char **envp)
@@ -49,6 +76,7 @@ t_general_info	*init_info(char *arg0, char **envp)
 	}
 	info->cwd = getcwd(NULL, 0);
 	if (!info->cwd)
-		perror(arg0);
+		ft_putstr_fd("Error retrieving current directory\n", STDERR_FILENO);
+	init_pwd(info);
 	return (info);
 }

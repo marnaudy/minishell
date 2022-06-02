@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:26:38 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/01 12:18:21 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:04:19 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,31 @@ static int	parse_env(char *env, t_general_info *info)
 	return (0);
 }
 
+static int	add_path(t_general_info *info)
+{
+	char	*key;
+	char	*path;
+
+	path = fetch_value(info->env, "PATH");
+	if (path)
+		return (0);
+	path = ft_strdup(
+			"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
+	if (!path)
+	{
+		perror(info->prog_name);
+		return (-1);
+	}
+	key = ft_strdup("PATH");
+	if (!key)
+	{
+		perror(info->prog_name);
+		free(path);
+		return (-1);
+	}
+	return (add_to_env(info, key, path, 0));
+}
+
 int	init_env_list(char **envp, t_general_info *info)
 {
 	int			i;
@@ -95,5 +120,5 @@ int	init_env_list(char **envp, t_general_info *info)
 		i++;
 	}
 	remove_value(&info->env, "_");
-	return (0);
+	return (add_path(info));
 }

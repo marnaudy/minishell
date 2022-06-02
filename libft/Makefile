@@ -52,7 +52,7 @@ SRCS		= 	ft_atoi.c \
 
 OBJS		=	${SRCS:.c=.o}
 
-CC			=	gcc
+CC			=	cc
 
 CFLAGS		=	-Wall -Wextra -Werror
 

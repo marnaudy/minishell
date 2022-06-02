@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:30:49 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/01 14:19:37 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:03:57 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	remove_value(t_env_list **list, char *key)
 		return (0);
 	}
 	iter = *list;
-	while (iter->next)
+	while (iter && iter->next)
 	{
 		if (!ft_strcmp(iter->next->key, key))
 		{

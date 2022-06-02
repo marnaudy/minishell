@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:32:30 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/06/01 14:46:19 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 15:44:46 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ int	env_size(t_env_list *env)
 	i = 0;
 	while (env)
 	{
+		if (env->export)
+			i++;
 		env = env->next;
-		i++;
 	}
 	return (i);
 }
@@ -65,9 +66,12 @@ t_env_list	*get_env_arr(t_env_list *env_list, char *prog_name, int *size)
 	i = 0;
 	while (env_list)
 	{
-		arr[i].key = env_list->key;
-		arr[i].value = env_list->value;
-		i++;
+		if (env_list->export)
+		{
+			arr[i].key = env_list->key;
+			arr[i].value = env_list->value;
+			i++;
+		}
 		env_list = env_list->next;
 	}
 	return (arr);

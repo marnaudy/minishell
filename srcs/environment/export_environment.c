@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:49:06 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/01 12:27:18 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 15:39:33 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	export_env(t_general_info *info, char ***env_arr, char *underscore)
 	i = 0;
 	while (list)
 	{
-		if (list->export)
+		if (list->export == 1)
 		{
 			(*env_arr)[i] = export_key_val_pair(list, info->prog_name);
 			if (!(*env_arr)[i])

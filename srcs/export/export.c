@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:52:14 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/06/01 14:21:51 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 15:39:49 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	export_equal(char *key, char *value, t_general_info *info)
 			perror(info->prog_name);
 			return (-1);
 		}
-		if (add_to_env(info, key, value, 0))
+		if (add_to_env(info, key, value, 2))
 			return (-1);
 		return (0);
 	}
