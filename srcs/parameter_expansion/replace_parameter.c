@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 11:48:00 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/01 17:19:40 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:52:02 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ int	free_and_ret(char *s1, char *s2, int ret)
 	return (ret);
 }
 
-static int	replace_parameter_exit_code(char **str, int *idx, int param_len)
+static int	replace_parameter_exit_code(char **str, int exit_code,
+		int *idx, int param_len)
 {
 	char	*value;
 	char	*new_str;
 
-	value = ft_itoa(g_exit_code);
+	value = ft_itoa(exit_code);
 	if (!value)
 		return (-1);
 	new_str = replace_in_str(*str, *idx, param_len, value);
@@ -97,7 +98,7 @@ int	replace_parameter(char **str, int *idx,
 		|| !ft_strncmp(&(*str)[*idx], "${?}", 4))
 		&& (!is_escaped(*str, *idx) || ignore_quotes))
 		return (
-			replace_parameter_exit_code(str, idx, param_len));
+			replace_parameter_exit_code(str, info->exit_code, idx, param_len));
 	if ((*str)[(*idx) + 1] != '{')
 		return (replace_parameter_no_brace(str, idx, info->env, param_len));
 	return (replace_parameter_brace(str, idx, param_len, info));

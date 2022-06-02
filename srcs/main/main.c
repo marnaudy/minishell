@@ -6,19 +6,20 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:19:56 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/02 11:27:20 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 11:51:47 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_exit_code;
-
 void	exit_minishell(t_general_info *info)
 {
+	int	ret;
+
+	ret = info->exit_code;
 	free_general_info(info);
 	rl_clear_history();
-	exit(g_exit_code);
+	exit(ret);
 }
 
 t_list	*get_token_list(t_general_info *info)
@@ -38,12 +39,12 @@ t_list	*get_token_list(t_general_info *info)
 	free(input);
 	if (ret < 0)
 	{
-		g_exit_code = 1;
+		info->exit_code = 1;
 		exit_minishell(info);
 	}
 	if (ret)
 	{
-		g_exit_code = 2;
+		info->exit_code = 2;
 		return (NULL);
 	}
 	return (token_list);
@@ -58,21 +59,21 @@ int	check_token_list(t_list *token_list, t_general_info *info,
 	if (syntax_ret < 0)
 	{
 		ft_lstclear(&token_list, &free);
-		g_exit_code = 1;
+		info->exit_code = 1;
 		exit_minishell(info);
 	}
 	if (read_all_here_docs(token_list, info->prog_name,
 			syntax_ret, doc_list) < 0)
 	{
 		ft_lstclear(&token_list, &free);
-		g_exit_code = 1;
+		info->exit_code = 1;
 		exit_minishell(info);
 	}
 	if (syntax_ret)
 	{
 		ft_lstclear(&token_list, &free);
 		ft_redirect_lstclear(doc_list);
-		g_exit_code = 2;
+		info->exit_code = 2;
 		return (1);
 	}
 	return (0);
@@ -86,12 +87,12 @@ void	parse_and_exec(t_list *token_list, t_redirect_list *here_doc_list,
 	{
 		ft_lstclear(&token_list, &free);
 		ft_redirect_lstclear(&here_doc_list);
-		g_exit_code = 1;
+		info->exit_code = 1;
 		exit_minishell(info);
 	}
 	if (set_signals_exec(info->prog_name) || exec_node(info->root, info, 0) < 0)
 	{
-		g_exit_code = 1;
+		info->exit_code = 1;
 		exit_minishell(info);
 	}
 	free_tree(&info->root);

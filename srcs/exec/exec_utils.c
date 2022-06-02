@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cboudrin <cboudrin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:38:02 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/01 17:18:04 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/05/24 16:32:57 by cboudrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	exit_command_node(t_general_info *info, int is_child, int ret)
 		rl_clear_history();
 		exit(ret);
 	}
-	g_exit_code = ret;
+	info->exit_code = ret;
 	return (ret);
 }
 

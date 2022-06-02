@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:33:10 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/06/02 11:41:13 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 11:50:11 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	set_signals_wait(void)
 	return (0);
 }
 
-void	wait_child(int pid)
+void	wait_child(int pid, t_general_info *info)
 {
 	int	status;
 	int	sig;
@@ -52,7 +52,7 @@ void	wait_child(int pid)
 	if (WIFSIGNALED(status) > 0)
 	{
 		sig = WTERMSIG(status);
-		g_exit_code = 128 + sig;
+		info->exit_code = 128 + sig;
 		if (sig == SIGBUS)
 			write(STDERR_FILENO, "Bus error (core dumped)\n", 24);
 		if (sig == SIGSEGV)
@@ -63,5 +63,5 @@ void	wait_child(int pid)
 			write(STDERR_FILENO, "Quit (core dumped)\n", 19);
 		return ;
 	}
-	g_exit_code = WEXITSTATUS(status);
+	info->exit_code = WEXITSTATUS(status);
 }

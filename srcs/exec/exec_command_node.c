@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:43:58 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/01 17:20:38 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:25:41 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ int	expand_exec_command_node(t_tree *node, t_general_info *info, int is_child)
 		return (-1);
 	if (pid == 0)
 		exec_command_node(node, info);
-	wait_child(pid);
+	wait_child(pid, info);
 	return (0);
 }
