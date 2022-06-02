@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 17:13:19 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/02 11:41:31 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 12:30:47 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	init_signals_read(char *prog_name)
 		return (-1);
 	}
 	sa.sa_handler = &sig_int_handler_read;
-	if (sigaction(SIGINT, &sa, NULL))
+	if (isatty(STDIN_FILENO) && sigaction(SIGINT, &sa, NULL))
 	{
 		perror(prog_name);
 		return (-1);
@@ -68,7 +68,7 @@ int	set_signals_exec(char *prog_name)
 	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_handler = &sig_int_handler_exec;
-	if (sigaction(SIGINT, &sa, NULL))
+	if (isatty(STDIN_FILENO) && sigaction(SIGINT, &sa, NULL))
 	{
 		perror(prog_name);
 		return (-1);

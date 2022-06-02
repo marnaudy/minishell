@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:33:10 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/06/02 12:09:28 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 12:29:56 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	set_signals_wait(void)
 	sa.sa_flags = SA_RESTART;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_handler = &sig_int_wait;
-	if (sigaction(SIGINT, &sa, NULL))
+	if (isatty(STDIN_FILENO) && sigaction(SIGINT, &sa, NULL))
 	{
 		perror(NULL);
 		return (-1);
@@ -48,8 +48,7 @@ void	wait_child(int pid, t_general_info *info)
 	int	sig;
 
 	set_signals_wait();
-	if (waitpid(pid, &status, 0) < 0)
-		perror(NULL);
+	waitpid(pid, &status, 0);
 	if (WIFSIGNALED(status) > 0)
 	{
 		sig = WTERMSIG(status);
