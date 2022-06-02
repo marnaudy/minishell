@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 18:00:24 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/27 15:34:54 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 15:14:13 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ static int	open_files_builtin(int *fd_out,
 				t_general_info *info, t_tree *node)
 {
 	int	fd_in;
+	int	ret;
 
-	if (open_redirects(node, info, &fd_in, fd_out))
-		return (-1);
+	ret = open_redirects(node, info, &fd_in, fd_out);
+	if (ret)
+		return (ret);
 	if (fd_in != STDIN_FILENO)
 		close(fd_in);
 	return (0);
@@ -40,9 +42,11 @@ int	is_builtin(t_tree *node)
 int	launch_builtin(t_tree *node, t_general_info *info)
 {
 	int	fd_out;
+	int	ret;
 
-	if (open_files_builtin(&fd_out, info, node))
-		return (-1);
+	ret = open_files_builtin(&fd_out, info, node);
+	if (ret)
+		return (ret);
 	if (!ft_strcmp((char *)node->arg->content, "echo"))
 		return (echo(node, fd_out));
 	if (!ft_strcmp((char *)node->arg->content, "unset"))

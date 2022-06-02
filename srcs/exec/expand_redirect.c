@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:02:58 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/27 16:00:25 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 15:23:51 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static int	expand_filename(char **filename, t_general_info *info)
 		return (free_lstclear_ret(&tmp->next, tmp, -1));
 	if (!tmp || tmp->next)
 	{
+		if (tmp)
+			*filename = tmp->content;
 		if (tmp)
 			ft_lstclear(&tmp->next, &free);
 		else
