@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 17:24:13 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/01 17:48:43 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 11:41:07 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+# define _GNU_SOURCE
 
 enum e_operator
 {
@@ -114,7 +116,7 @@ int				restore_stdout(int fd_save, char *prog_name);
 t_general_info	*free_general_info(t_general_info *info);
 t_general_info	*init_info(char *arg0, char **envp);
 char			*ft_strcat_with_slash(char *s1, char *s2);
-int				init_signals(char *prog_name);
+int				init_signals_read(char *prog_name);
 int				set_signals_exec(char *prog_name);
 
 #endif

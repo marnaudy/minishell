@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:19:56 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/01 18:08:54 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 11:27:20 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	main(int argc, char **argv, char **envp)
 		return (-1);
 	while (1)
 	{
-		if (init_signals(info->prog_name))
+		if (init_signals_read(info->prog_name))
 		{
 			g_exit_code = 1;
 			exit_minishell(info);

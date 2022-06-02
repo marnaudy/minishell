@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:33:10 by cboudrin          #+#    #+#             */
-/*   Updated: 2022/06/01 18:59:52 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 11:41:13 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@ int	set_signals_wait(void)
 {
 	struct sigaction	sa;
 
-	sa.sa_flags = 0;
+	sa.sa_flags = SA_RESTART;
 	sigemptyset(&sa.sa_mask);
-	sa.sa_handler = SIG_IGN;
+	sa.sa_handler = &print_nl;
 	if (sigaction(SIGINT, &sa, NULL))
 	{
 		perror(NULL);
 		return (-1);
 	}
+	sa.sa_flags = 0;
 	sa.sa_handler = SIG_IGN;
 	if (sigaction(SIGQUIT, &sa, NULL))
 	{

@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 17:13:19 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/06/01 18:24:45 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/02 11:41:31 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	sig_int_handler_exec(int sig)
 		ft_putstr_fd("\n", STDERR_FILENO);
 }
 
-void	sig_quit_handler(int sig)
+void	sig_quit_handler_exec(int sig)
 {
 	(void)sig;
 	g_exit_code = 131;
@@ -40,13 +40,13 @@ void	sig_quit_handler(int sig)
 		ft_putstr_fd("\n", STDERR_FILENO);
 }
 
-int	init_signals(char *prog_name)
+int	init_signals_read(char *prog_name)
 {
 	struct sigaction	sa;
 
 	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
-	sa.sa_handler = &sig_quit_handler;
+	sa.sa_handler = SIG_IGN;
 	if (sigaction(SIGQUIT, &sa, NULL))
 	{
 		perror(prog_name);
@@ -69,6 +69,12 @@ int	set_signals_exec(char *prog_name)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_handler = &sig_int_handler_exec;
 	if (sigaction(SIGINT, &sa, NULL))
+	{
+		perror(prog_name);
+		return (-1);
+	}
+	sa.sa_handler = &sig_quit_handler_exec;
+	if (sigaction(SIGQUIT, &sa, NULL))
 	{
 		perror(prog_name);
 		return (-1);
