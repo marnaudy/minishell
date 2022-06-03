@@ -6,7 +6,7 @@
 /*   By: marnaudy <marnaudy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 18:24:46 by marnaudy          #+#    #+#             */
-/*   Updated: 2022/05/19 18:25:41 by marnaudy         ###   ########.fr       */
+/*   Updated: 2022/06/03 10:38:56 by marnaudy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	*open_pipes(int nb_pipes, char *prog_name)
 		{
 			perror(prog_name);
 			close_pipes(pipe_fd, i);
+			return (NULL);
 		}
 		i++;
 	}
